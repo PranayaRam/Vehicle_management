@@ -1,0 +1,13 @@
+{
+  "name": "vehicle-service-management",
+  "version": "1.0.0",
+  "description": "Production-style Full-Stack Vehicle Service Management System (MERN)",
+  "scripts": {
+    "server": "npm.cmd --prefix server run dev",
+    "client": "npm.cmd --prefix client run dev",
+    "seed": "npm.cmd --prefix server run seed"
+  },
+  "keywords": ["vehicle-service", "mern", "automobile-garage-management"],
+  "author": "",
+  "license": "ISC"
+}
