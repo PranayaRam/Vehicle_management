@@ -221,3 +221,101 @@ exports.changePassword = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Get all users (admin only)
+// @route   GET /api/auth/users
+// @access  Private (Admin)
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const { role, search } = req.query;
+    const query = {};
+    if (role && role !== 'ALL') {
+      query.role = role;
+    }
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { phone: { $regex: search, $options: 'i' } }
+      ];
+    }
+    const users = await User.find(query).sort({ createdAt: -1 });
+    res.status(200).json({
+      success: true,
+      count: users.length,
+      data: users
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Create a staff or admin user
+// @route   POST /api/auth/staff
+// @access  Private (Admin)
+exports.createStaff = async (req, res, next) => {
+  try {
+    const { name, email, password, phone, role, address } = req.body;
+    if (!name || !email || !password || !phone) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name, email, password, and phone are required'
+      });
+    }
+    const existingUser = await User.findOne({ email: email.toLowerCase().trim() });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: 'A user with this email already exists'
+      });
+    }
+    const user = await User.create({
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      password,
+      phone: phone.trim(),
+      address: address ? address.trim() : '',
+      role: role && ['STAFF', 'ADMIN'].includes(role) ? role : 'STAFF'
+    });
+    res.status(201).json({
+      success: true,
+      message: `${user.role} account created successfully`,
+      data: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        isActive: user.isActive,
+        createdAt: user.createdAt
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Toggle user status (activate / deactivate)
+// @route   PUT /api/auth/users/:id/status
+// @access  Private (Admin)
+exports.toggleUserStatus = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    if (user._id.toString() === req.user._id.toString()) {
+      return res.status(400).json({ success: false, message: 'Cannot deactivate your own account' });
+    }
+    user.isActive = !user.isActive;
+    await user.save();
+    res.status(200).json({
+      success: true,
+      message: `User ${user.isActive ? 'activated' : 'deactivated'} successfully`,
+      data: user
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+

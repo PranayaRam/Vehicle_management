@@ -32,6 +32,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import PartsInventory from './pages/admin/PartsInventory';
 import LabourCatalog from './pages/admin/LabourCatalog';
 import ServiceTypesManager from './pages/admin/ServiceTypesManager';
+import UserManagement from './pages/admin/UserManagement';
 
 function App() {
   return (
@@ -108,6 +109,7 @@ function App() {
         <Route path="service-types" element={<ServiceTypesManager />} />
         <Route path="parts" element={<PartsInventory />} />
         <Route path="labour" element={<LabourCatalog />} />
+        <Route path="users" element={<UserManagement />} />
         <Route path="reports" element={<AdminDashboard />} />
       </Route>
 

@@ -5,14 +5,22 @@ const {
   login,
   getMe,
   updateProfile,
-  changePassword
+  changePassword,
+  getAllUsers,
+  createStaff,
+  toggleUserStatus
 } = require('../controllers/authController');
-const { protect } = require('../middleware/auth');
+const { protect, authorize } = require('../middleware/auth');
 
 router.post('/register', register);
 router.post('/login', login);
 router.get('/me', protect, getMe);
 router.put('/profile', protect, updateProfile);
 router.put('/change-password', protect, changePassword);
+
+// Admin-only user management
+router.get('/users', protect, authorize('ADMIN'), getAllUsers);
+router.post('/staff', protect, authorize('ADMIN'), createStaff);
+router.put('/users/:id/status', protect, authorize('ADMIN'), toggleUserStatus);
 
 module.exports = router;

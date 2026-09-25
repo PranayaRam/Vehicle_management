@@ -17,10 +17,13 @@ import {
   DollarSign,
   AlertTriangle,
   ArrowRight,
-  ShieldAlert
+  ShieldAlert,
+  Printer
 } from 'lucide-react';
 import api from '../../services/api';
 import StatusBadge from '../../components/common/StatusBadge';
+import WorkflowStepper from '../../components/common/WorkflowStepper';
+import InvoiceModal from '../../components/common/InvoiceModal';
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -38,6 +41,7 @@ const JobDetails = () => {
 
   // Active Sub-tab
   const [activeTab, setActiveTab] = useState('inspection');
+  const [invoiceModalOpen, setInvoiceModalOpen] = useState(false);
 
   // Loading & Alerts
   const [loading, setLoading] = useState(true);
@@ -450,6 +454,9 @@ const JobDetails = () => {
           <span>{error}</span>
         </div>
       )}
+
+      {/* Visual Workflow Progress Stepper */}
+      <WorkflowStepper currentStatus={job.status} />
 
       {/* Vehicle & Customer Summary Card */}
       <div className="content-card mb-6">
@@ -869,6 +876,14 @@ const JobDetails = () => {
                       </div>
                     </div>
 
+                    <button
+                      type="button"
+                      onClick={() => setInvoiceModalOpen(true)}
+                      className="btn btn-outline btn-sm btn-block mb-4 flex items-center justify-center gap-1.5"
+                    >
+                      <Printer size={14} /> View & Print Official Tax Invoice
+                    </button>
+
                     {/* Record Payment Form */}
                     {invoice.paymentStatus !== 'PAID' && (
                       <form onSubmit={handleRecordPayment} className="border-t border-border pt-3">
@@ -1004,6 +1019,13 @@ const JobDetails = () => {
           </div>
         </div>
       )}
+
+      {/* Official Tax Invoice Slip Modal */}
+      <InvoiceModal
+        isOpen={invoiceModalOpen}
+        onClose={() => setInvoiceModalOpen(false)}
+        invoice={invoice}
+      />
     </div>
   );
 };

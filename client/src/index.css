@@ -1875,3 +1875,188 @@ body {
     display: none;
   }
 }
+
+/* ========================================================
+   WORKFLOW STEPPER STYLES
+   ======================================================== */
+.workflow-stepper-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.workflow-stepper-card.compact {
+  padding: 0.75rem 0.5rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+.stepper-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 780px;
+  position: relative;
+}
+
+.stepper-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  z-index: 2;
+}
+
+.node-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  color: #64748b;
+  border: 2px solid #cbd5e1;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-bottom: 0.4rem;
+}
+
+.node-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* Completed Stage */
+.stepper-node.completed .node-icon-wrapper {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.stepper-node.completed .node-label {
+  color: #059669;
+}
+
+.checkmark-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 14px;
+  height: 14px;
+  background: #10b981;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+}
+
+/* Current Stage */
+.stepper-node.current .node-icon-wrapper {
+  background: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.2);
+  transform: scale(1.1);
+  animation: pulse-ring 2s infinite;
+}
+
+.stepper-node.current .node-label {
+  color: #0284c7;
+  font-weight: 700;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(2, 132, 199, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0); }
+}
+
+/* Pending Stage */
+.stepper-node.pending .node-icon-wrapper {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+}
+
+/* Connector Line */
+.node-connector {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background: #e2e8f0;
+  z-index: -1;
+}
+
+.node-connector.active {
+  background: #059669;
+}
+
+/* ========================================================
+   PRINT STYLES (TAX INVOICE & INSPECTION REPORTS)
+   ======================================================== */
+@media print {
+  /* Hide interactive browser app chrome */
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .sidebar,
+  .topbar,
+  .navbar,
+  .footer,
+  .no-print,
+  button,
+  .btn,
+  .workflow-tabs,
+  .page-header {
+    display: none !important;
+  }
+
+  .modal-backdrop {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .modal-content {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .invoice-printable-sheet {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure high-contrast crisp text */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+

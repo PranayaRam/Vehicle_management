@@ -9,12 +9,15 @@ import {
   History,
   Download,
   ShieldCheck,
-  ChevronRight
+  ChevronRight,
+  Eye,
+  Printer
 } from 'lucide-react';
 import api from '../../services/api';
 import StatusBadge from '../../components/common/StatusBadge';
 import EmptyState from '../../components/common/EmptyState';
 import Modal from '../../components/common/Modal';
+import InvoiceModal from '../../components/common/InvoiceModal';
 
 const CustomerInvoices = () => {
   const [activeTab, setActiveTab] = useState('invoices');
@@ -32,6 +35,10 @@ const CustomerInvoices = () => {
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('UPI');
   const [paySubmitting, setPaySubmitting] = useState(false);
+
+  // Invoice Print / Preview Modal State
+  const [previewInvoiceOpen, setPreviewInvoiceOpen] = useState(false);
+  const [previewInvoiceData, setPreviewInvoiceData] = useState(null);
 
   const fetchInitialData = async () => {
     try {
@@ -197,16 +204,26 @@ const CustomerInvoices = () => {
                       <span className="font-mono">₹{(inv.amountPaid || 0).toLocaleString()}</span>
                     </div>
 
-                    {inv.paymentStatus !== 'PAID' && (
-                      <div className="flex justify-end pt-3">
+                    <div className="flex justify-between items-center pt-3 border-t border-border mt-2">
+                      <button
+                        onClick={() => {
+                          setPreviewInvoiceData(inv);
+                          setPreviewInvoiceOpen(true);
+                        }}
+                        className="btn btn-outline btn-sm flex items-center gap-1.5"
+                      >
+                        <Eye size={14} /> View & Print Official Slip
+                      </button>
+
+                      {inv.paymentStatus !== 'PAID' && (
                         <button
                           onClick={() => handleOpenPay(inv)}
-                          className="btn btn-primary btn-sm flex items-center gap-1"
+                          className="btn btn-primary btn-sm flex items-center gap-1.5"
                         >
-                          <CreditCard size={15} /> Settle Payment (₹{(inv.total - (inv.amountPaid || 0)).toLocaleString()})
+                          <CreditCard size={14} /> Settle Payment (₹{(inv.total - (inv.amountPaid || 0)).toLocaleString()})
                         </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -341,6 +358,13 @@ const CustomerInvoices = () => {
           </button>
         </div>
       </Modal>
+
+      {/* Official Tax Invoice Slip Modal */}
+      <InvoiceModal
+        isOpen={previewInvoiceOpen}
+        onClose={() => setPreviewInvoiceOpen(false)}
+        invoice={previewInvoiceData}
+      />
     </div>
   );
 };
