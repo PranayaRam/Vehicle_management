@@ -216,11 +216,34 @@ exports.approveEstimate = async (req, res, next) => {
       });
     }
 
-    // 1. Deduct allocated parts from inventory stock
+    // 1. Verify stock availability for all parts before deducting
     for (const p of estimate.parts) {
-      await Part.findByIdAndUpdate(p.partId, {
-        $inc: { stockQuantity: -p.quantity }
-      });
+      if (p.partId) {
+        const partDoc = await Part.findById(p.partId);
+        if (!partDoc) {
+          return res.status(400).json({
+            success: false,
+            message: `Part '${p.name || 'Selected part'}' is no longer available in inventory`
+          });
+        }
+        if (partDoc.stockQuantity < p.quantity) {
+          return res.status(400).json({
+            success: false,
+            message: `Insufficient stock for part '${partDoc.name}'. Required: ${p.quantity}, In Stock: ${partDoc.stockQuantity}`
+          });
+        }
+      }
+    }
+
+    // Deduct allocated parts from inventory stock
+    for (const p of estimate.parts) {
+      if (p.partId) {
+        await Part.findByIdAndUpdate(
+          p.partId,
+          { $inc: { stockQuantity: -p.quantity } },
+          { runValidators: true }
+        );
+      }
     }
 
     // 2. Mark estimate APPROVED

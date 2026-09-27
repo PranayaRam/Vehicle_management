@@ -1,6 +1,7 @@
 const Delivery = require('../models/Delivery');
 const ServiceJob = require('../models/ServiceJob');
 const Invoice = require('../models/Invoice');
+const Vehicle = require('../models/Vehicle');
 const StatusHistory = require('../models/StatusHistory');
 
 // @desc    Mark vehicle ready for delivery (Staff, Admin)
@@ -127,6 +128,21 @@ exports.completeDelivery = async (req, res, next) => {
 // @access  Private
 exports.getVehicleServiceHistory = async (req, res, next) => {
   try {
+    const vehicle = await Vehicle.findById(req.params.vehicleId);
+    if (!vehicle) {
+      return res.status(404).json({
+        success: false,
+        message: 'Vehicle not found'
+      });
+    }
+
+    if (req.user.role === 'CUSTOMER' && vehicle.customerId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied: You do not own this vehicle'
+      });
+    }
+
     const completedJobs = await ServiceJob.find({
       vehicleId: req.params.vehicleId,
       status: 'COMPLETED'

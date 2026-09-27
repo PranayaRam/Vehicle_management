@@ -45,6 +45,31 @@ exports.createBooking = async (req, res, next) => {
       });
     }
 
+    // Rule: Prevent double-booking if vehicle already has an active appointment
+    const existingActiveBooking = await Booking.findOne({
+      vehicleId,
+      status: { $in: ['BOOKED', 'CONFIRMED'] }
+    });
+    if (existingActiveBooking) {
+      return res.status(400).json({
+        success: false,
+        message: `This vehicle already has an active service appointment (${existingActiveBooking.bookingNumber}) scheduled.`
+      });
+    }
+
+    // Rule: Prevent booking if vehicle is currently in workshop for service
+    const ServiceJob = require('../models/ServiceJob');
+    const activeJob = await ServiceJob.findOne({
+      vehicleId,
+      status: { $in: ['INSPECTION', 'ESTIMATE_PENDING', 'APPROVED', 'IN_SERVICE', 'QUALITY_CHECK', 'READY_FOR_DELIVERY'] }
+    });
+    if (activeJob) {
+      return res.status(400).json({
+        success: false,
+        message: `This vehicle is currently in the workshop under active service (Job #${activeJob.jobNumber}).`
+      });
+    }
+
     // Verify ServiceType exists and is active
     const serviceType = await ServiceType.findById(serviceTypeId);
     if (!serviceType || !serviceType.isActive) {

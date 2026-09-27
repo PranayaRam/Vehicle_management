@@ -130,6 +130,22 @@ exports.updateJobStatus = async (req, res, next) => {
     const currentStatus = job.status;
     const allowedNext = VALID_TRANSITIONS[currentStatus] || [];
 
+    // Guard: APPROVED must be set through the digital customer estimate approval workflow
+    if (status === 'APPROVED') {
+      return res.status(400).json({
+        success: false,
+        message: 'Status cannot be directly changed to APPROVED here. The estimate must be approved by the customer (or via the estimate approval endpoint).'
+      });
+    }
+
+    // Guard: COMPLETED must be set through the vehicle delivery handover workflow
+    if (status === 'COMPLETED') {
+      return res.status(400).json({
+        success: false,
+        message: 'Status cannot be directly changed to COMPLETED here. Vehicle delivery handover must be executed through the delivery endpoint with payment validation.'
+      });
+    }
+
     // Enforce valid status transitions
     if (!allowedNext.includes(status) && req.user.role !== 'ADMIN') {
       return res.status(400).json({

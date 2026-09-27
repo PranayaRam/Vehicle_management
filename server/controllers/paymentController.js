@@ -33,10 +33,27 @@ exports.recordPayment = async (req, res, next) => {
       });
     }
 
+    // Customer ownership guard
+    if (req.user.role === 'CUSTOMER' && invoice.customerId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied: You can only make payments for your own invoices'
+      });
+    }
+
     if (invoice.paymentStatus === 'PAID') {
       return res.status(400).json({
         success: false,
         message: 'This invoice has already been paid in full'
+      });
+    }
+
+    // Overpayment validation
+    const remainingDue = invoice.total - (invoice.amountPaid || 0);
+    if (payAmount > remainingDue) {
+      return res.status(400).json({
+        success: false,
+        message: `Payment amount (₹${payAmount}) exceeds remaining balance (₹${remainingDue})`
       });
     }
 
@@ -86,6 +103,22 @@ exports.recordPayment = async (req, res, next) => {
 // @access  Private
 exports.getPaymentsByInvoiceId = async (req, res, next) => {
   try {
+    const invoice = await Invoice.findById(req.params.invoiceId);
+    if (!invoice) {
+      return res.status(404).json({
+        success: false,
+        message: 'Invoice not found'
+      });
+    }
+
+    // Customer ownership guard
+    if (req.user.role === 'CUSTOMER' && invoice.customerId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied: You can only view payments for your own invoices'
+      });
+    }
+
     const payments = await Payment.find({ invoiceId: req.params.invoiceId })
       .populate('recordedBy', 'name role')
       .sort({ paymentDate: -1 });

@@ -67,6 +67,4 @@ const inspectionSchema = new mongoose.Schema(
   }
 );
 
-inspectionSchema.index({ serviceJobId: 1 });
-
 module.exports = mongoose.model('Inspection', inspectionSchema);

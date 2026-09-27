@@ -48,7 +48,6 @@ const deliverySchema = new mongoose.Schema(
   }
 );
 
-deliverySchema.index({ serviceJobId: 1 });
 deliverySchema.index({ vehicleId: 1 });
 deliverySchema.index({ customerId: 1 });
 
