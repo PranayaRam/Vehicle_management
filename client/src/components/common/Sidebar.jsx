@@ -8,6 +8,7 @@ import {
   ClipboardList,
   FileCheck2,
   Receipt,
+  CreditCard,
   UserCheck,
   Package,
   Layers,
@@ -16,7 +17,10 @@ import {
   ShieldAlert,
   Clock,
   CheckCircle2,
-  Truck
+  Truck,
+  History,
+  Settings,
+  User
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -30,21 +34,35 @@ const Sidebar = () => {
           { to: '/admin/dashboard', label: 'Executive Dashboard', icon: LayoutDashboard },
           { to: '/admin/bookings', label: 'All Bookings', icon: ClipboardList },
           { to: '/admin/jobs', label: 'All Service Jobs', icon: Wrench },
-          { to: '/admin/users', label: 'User & Staff Roster', icon: Users },
+          { to: '/admin/vehicles', label: 'Fleet Vehicles', icon: Car },
+          { to: '/admin/inspections', label: 'Inspections Hub', icon: ShieldAlert },
+          { to: '/admin/estimates', label: 'Estimates Overview', icon: FileCheck2 },
+          { to: '/admin/invoices', label: 'Invoices & Billing', icon: Receipt },
+          { to: '/admin/payments', label: 'Payments Ledger', icon: CreditCard },
+          { to: '/admin/deliveries', label: 'Deliveries Handover', icon: Truck },
+          { to: '/admin/users', label: 'All Accounts Roster', icon: Users },
+          { to: '/admin/customers', label: 'Customer Directory', icon: UserCheck },
           { to: '/admin/service-types', label: 'Service Types', icon: Layers },
           { to: '/admin/parts', label: 'Parts Inventory', icon: Package },
           { to: '/admin/labour', label: 'Labour Catalog', icon: Clock },
-          { to: '/admin/reports', label: 'Reports & Analytics', icon: BarChart3 }
+          { to: '/admin/reports', label: 'Reports & Analytics', icon: BarChart3 },
+          { to: '/admin/settings', label: 'Garage Settings', icon: Settings },
+          { to: '/admin/profile', label: 'My Profile', icon: User }
         ];
       case 'STAFF':
         return [
           { to: '/staff/dashboard', label: 'Staff Dashboard', icon: LayoutDashboard },
           { to: '/staff/bookings', label: 'Bookings & Check-In', icon: ClipboardList },
           { to: '/staff/jobs', label: 'Active Service Jobs', icon: Wrench },
-          { to: '/staff/inspections', label: 'Vehicle Inspection', icon: ShieldAlert },
+          { to: '/staff/inspections', label: 'Vehicle Inspections', icon: ShieldAlert },
           { to: '/staff/estimates', label: 'Estimates & Approval', icon: FileCheck2 },
-          { to: '/staff/billing', label: 'Billing & Payments', icon: Receipt },
-          { to: '/staff/delivery', label: 'Vehicle Delivery', icon: Truck }
+          { to: '/staff/parts', label: 'Parts Inventory', icon: Package },
+          { to: '/staff/labour', label: 'Labour Catalog', icon: Clock },
+          { to: '/staff/invoices', label: 'Billing & Invoices', icon: Receipt },
+          { to: '/staff/payments', label: 'Payments Ledger', icon: CreditCard },
+          { to: '/staff/delivery', label: 'Vehicle Delivery', icon: Truck },
+          { to: '/staff/customers', label: 'Customer Directory', icon: Users },
+          { to: '/staff/profile', label: 'My Profile', icon: User }
         ];
       case 'CUSTOMER':
       default:
@@ -53,9 +71,12 @@ const Sidebar = () => {
           { to: '/customer/vehicles', label: 'My Vehicles', icon: Car },
           { to: '/customer/book', label: 'Book a Service', icon: CalendarPlus },
           { to: '/customer/bookings', label: 'Service Bookings', icon: ClipboardList },
+          { to: '/customer/service-tracking', label: 'Live Service Tracking', icon: Wrench },
           { to: '/customer/estimates', label: 'Estimates & Approval', icon: FileCheck2 },
-          { to: '/customer/invoices', label: 'Invoices & History', icon: Receipt },
-          { to: '/customer/profile', label: 'My Profile', icon: UserCheck }
+          { to: '/customer/invoices', label: 'Invoices & Billing', icon: Receipt },
+          { to: '/customer/payments', label: 'Payment Center', icon: CreditCard },
+          { to: '/customer/service-history', label: 'Vehicle History', icon: History },
+          { to: '/customer/profile', label: 'My Profile', icon: User }
         ];
     }
   };

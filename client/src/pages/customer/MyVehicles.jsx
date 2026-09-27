@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Plus, Car, AlertCircle, CheckCircle2 } from 'lucide-react';
 import api from '../../services/api';
 import VehicleCard from '../../components/vehicles/VehicleCard';
@@ -6,6 +7,7 @@ import VehicleModal from '../../components/vehicles/VehicleModal';
 import EmptyState from '../../components/common/EmptyState';
 
 const MyVehicles = () => {
+  const location = useLocation();
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -31,7 +33,11 @@ const MyVehicles = () => {
 
   useEffect(() => {
     fetchVehicles();
-  }, []);
+    if (location.pathname.endsWith('/add')) {
+      setEditingVehicle(null);
+      setIsModalOpen(true);
+    }
+  }, [location.pathname]);
 
   const handleOpenAdd = () => {
     setEditingVehicle(null);

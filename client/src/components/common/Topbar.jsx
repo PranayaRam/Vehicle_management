@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { User, LogOut, Bell, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -24,6 +24,8 @@ const Topbar = () => {
     }
   };
 
+  const profilePath = `/${user?.role?.toLowerCase() || 'customer'}/profile`;
+
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -37,7 +39,12 @@ const Topbar = () => {
           {user?.role}
         </span>
 
-        <div className="user-profile-badge">
+        <Link
+          to={profilePath}
+          className="user-profile-badge"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+          title="Manage Profile & Security"
+        >
           <div className="avatar-circle">
             {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
           </div>
@@ -45,11 +52,11 @@ const Topbar = () => {
             <span className="user-name">{user?.name}</span>
             <span className="user-email">{user?.email}</span>
           </div>
-        </div>
+        </Link>
 
         <button onClick={handleLogout} className="btn btn-outline btn-sm logout-btn" title="Sign Out">
           <LogOut size={16} />
-          <span>Logout</span>
+          <span className="logout-text">Logout</span>
         </button>
       </div>
     </header>

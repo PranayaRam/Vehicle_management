@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Wrench, User, LogOut, LayoutDashboard, Calendar, Car } from 'lucide-react';
+import { Wrench, User, LogOut, LayoutDashboard, Calendar, Car, Menu, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout, getDashboardPath } = useAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -61,8 +62,52 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            className="mobile-nav-toggle btn btn-ghost btn-sm"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle Navigation"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {mobileOpen && (
+        <div className="mobile-nav-menu">
+          <NavLink
+            to="/"
+            className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+            end
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/services"
+            className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            Services
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            About
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            Contact
+          </NavLink>
+        </div>
+      )}
     </header>
   );
 };

@@ -64,7 +64,7 @@ const AdminDashboard = () => {
 
       {/* KPI Stat Cards */}
       <div className="stats-grid mb-6">
-        <div className="stat-card">
+        <Link to="/admin/customers" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-blue-subtle text-primary">
             <Users size={24} />
           </div>
@@ -72,9 +72,9 @@ const AdminDashboard = () => {
             <span className="stat-value">{loading ? '...' : overview?.totalCustomers ?? 0}</span>
             <span className="stat-name">Registered Customers</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/admin/vehicles" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-purple-subtle text-purple">
             <Car size={24} />
           </div>
@@ -82,9 +82,9 @@ const AdminDashboard = () => {
             <span className="stat-value">{loading ? '...' : overview?.totalVehicles ?? 0}</span>
             <span className="stat-name">Active Fleet Vehicles</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/admin/invoices" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-emerald-subtle text-success">
             <TrendingUp size={24} />
           </div>
@@ -92,9 +92,9 @@ const AdminDashboard = () => {
             <span className="stat-value">₹{loading ? '...' : (overview?.totalRevenue || 0).toLocaleString()}</span>
             <span className="stat-name">Realized Revenue</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/admin/invoices" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-amber-subtle text-amber">
             <Clock size={24} />
           </div>
@@ -102,7 +102,7 @@ const AdminDashboard = () => {
             <span className="stat-value">₹{loading ? '...' : (overview?.pendingReceivables || 0).toLocaleString()}</span>
             <span className="stat-name">Pending Invoices</span>
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* Low-Stock Parts Warning Panel */}

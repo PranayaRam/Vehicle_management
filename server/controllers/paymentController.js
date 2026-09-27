@@ -132,3 +132,65 @@ exports.getPaymentsByInvoiceId = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Get all payments (Staff, Admin)
+// @route   GET /api/payments
+// @access  Private (Staff, Admin)
+exports.getAllPayments = async (req, res, next) => {
+  try {
+    const payments = await Payment.find()
+      .populate('recordedBy', 'name role')
+      .populate({
+        path: 'invoiceId',
+        select: 'invoiceNumber total amountPaid paymentStatus',
+        populate: [
+          { path: 'customerId', select: 'name email phone' },
+          { path: 'vehicleId', select: 'registrationNumber brand model' },
+          { path: 'serviceJobId', select: 'jobNumber' }
+        ]
+      })
+      .sort({ paymentDate: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: payments.length,
+      data: payments
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Get customer payments
+// @route   GET /api/payments/my
+// @access  Private (Customer)
+exports.getMyPayments = async (req, res, next) => {
+  try {
+    const customerInvoices = await Invoice.find({ customerId: req.user._id }).select('_id');
+    const invoiceIds = customerInvoices.map((inv) => inv._id);
+
+    const payments = await Payment.find({ invoiceId: { $in: invoiceIds } })
+      .populate('recordedBy', 'name role')
+      .populate({
+        path: 'invoiceId',
+        select: 'invoiceNumber total amountPaid paymentStatus invoiceDate',
+        populate: {
+          path: 'serviceJobId',
+          select: 'jobNumber',
+          populate: {
+            path: 'vehicleId',
+            select: 'registrationNumber brand model'
+          }
+        }
+      })
+      .sort({ paymentDate: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: payments.length,
+      data: payments
+    });
+  } catch (error) {
+    next(error);
+  }
+};

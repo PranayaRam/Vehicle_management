@@ -178,3 +178,25 @@ exports.getVehicleServiceHistory = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Get all delivery records (Staff, Admin)
+// @route   GET /api/delivery
+// @access  Private (Staff, Admin)
+exports.getAllDeliveries = async (req, res, next) => {
+  try {
+    const deliveries = await Delivery.find()
+      .populate('serviceJobId', 'jobNumber status reportedProblem')
+      .populate('vehicleId', 'registrationNumber brand model variant currentMileage')
+      .populate('customerId', 'name email phone')
+      .populate('deliveredBy', 'name email')
+      .sort({ deliveryDate: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: deliveries.length,
+      data: deliveries
+    });
+  } catch (error) {
+    next(error);
+  }
+};

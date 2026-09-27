@@ -4,13 +4,17 @@ const {
   generateEstimate,
   getEstimateByJobId,
   approveEstimate,
-  rejectEstimate
+  rejectEstimate,
+  getAllEstimates,
+  getMyEstimates
 } = require('../controllers/estimateController');
 const { protect, authorize } = require('../middleware/auth');
 
 router.use(protect);
 
 router.post('/', authorize('STAFF', 'ADMIN'), generateEstimate);
+router.get('/', authorize('STAFF', 'ADMIN'), getAllEstimates);
+router.get('/my', getMyEstimates);
 router.get('/job/:jobId', getEstimateByJobId);
 router.put('/:id/approve', approveEstimate);
 router.put('/:id/reject', rejectEstimate);

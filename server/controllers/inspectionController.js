@@ -104,3 +104,30 @@ exports.getInspectionByJobId = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Get all inspections (Staff, Admin)
+// @route   GET /api/inspections
+// @access  Private (Staff, Admin)
+exports.getAllInspections = async (req, res, next) => {
+  try {
+    const inspections = await Inspection.find()
+      .populate('inspectedBy', 'name email role')
+      .populate({
+        path: 'serviceJobId',
+        select: 'jobNumber status reportedProblem',
+        populate: [
+          { path: 'vehicleId', select: 'registrationNumber brand model variant' },
+          { path: 'customerId', select: 'name email phone' }
+        ]
+      })
+      .sort({ inspectionDate: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: inspections.length,
+      data: inspections
+    });
+  } catch (error) {
+    next(error);
+  }
+};

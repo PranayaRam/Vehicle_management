@@ -229,7 +229,9 @@ exports.getAllUsers = async (req, res, next) => {
   try {
     const { role, search } = req.query;
     const query = {};
-    if (role && role !== 'ALL') {
+    if (req.user.role === 'STAFF') {
+      query.role = 'CUSTOMER';
+    } else if (role && role !== 'ALL') {
       query.role = role;
     }
     if (search) {

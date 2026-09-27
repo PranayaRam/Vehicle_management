@@ -37,12 +37,14 @@ app.use('/api/bookings', require('./routes/bookingRoutes'));
 app.use('/api/check-in', require('./routes/checkInRoutes'));
 app.use('/api/inspections', require('./routes/inspectionRoutes'));
 app.use('/api/service-jobs', require('./routes/serviceJobRoutes'));
+app.use('/api/jobs', require('./routes/serviceJobRoutes'));
 app.use('/api/parts', require('./routes/partRoutes'));
 app.use('/api/labour', require('./routes/labourRoutes'));
 app.use('/api/estimates', require('./routes/estimateRoutes'));
 app.use('/api/invoices', require('./routes/invoiceRoutes'));
 app.use('/api/payments', require('./routes/paymentRoutes'));
 app.use('/api/delivery', require('./routes/deliveryRoutes'));
+app.use('/api/deliveries', require('./routes/deliveryRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 

@@ -18,8 +18,8 @@ router.get('/me', protect, getMe);
 router.put('/profile', protect, updateProfile);
 router.put('/change-password', protect, changePassword);
 
-// Admin-only user management
-router.get('/users', protect, authorize('ADMIN'), getAllUsers);
+// User management
+router.get('/users', protect, authorize('STAFF', 'ADMIN'), getAllUsers);
 router.post('/staff', protect, authorize('ADMIN'), createStaff);
 router.put('/users/:id/status', protect, authorize('ADMIN'), toggleUserStatus);
 

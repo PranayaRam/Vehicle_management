@@ -58,7 +58,7 @@ const StaffDashboard = () => {
 
       {/* Staff Operational Metrics */}
       <div className="stats-grid mb-6">
-        <div className="stat-card">
+        <Link to="/staff/bookings" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-blue-subtle text-primary">
             <Calendar size={24} />
           </div>
@@ -66,9 +66,9 @@ const StaffDashboard = () => {
             <span className="stat-value">{loading ? '...' : stats?.todaysBookings ?? 0}</span>
             <span className="stat-name">Today's Bookings</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/staff/bookings" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-amber-subtle text-amber">
             <Clock size={24} />
           </div>
@@ -76,9 +76,9 @@ const StaffDashboard = () => {
             <span className="stat-value">{loading ? '...' : stats?.pendingCheckIns ?? 0}</span>
             <span className="stat-name">Pending Check-Ins</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/staff/jobs" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-purple-subtle text-purple">
             <Wrench size={24} />
           </div>
@@ -86,9 +86,9 @@ const StaffDashboard = () => {
             <span className="stat-value">{loading ? '...' : stats?.activeJobs ?? 0}</span>
             <span className="stat-name">Active Service Jobs</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/staff/delivery" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-emerald-subtle text-success">
             <Truck size={24} />
           </div>
@@ -96,7 +96,7 @@ const StaffDashboard = () => {
             <span className="stat-value">{loading ? '...' : stats?.readyForDelivery ?? 0}</span>
             <span className="stat-name">Ready for Delivery</span>
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* Workflow Gate Banner */}

@@ -77,7 +77,7 @@ const CustomerDashboard = () => {
 
       {/* Overview Stat Cards */}
       <div className="stats-grid mb-6">
-        <div className="stat-card">
+        <Link to="/customer/vehicles" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-blue-subtle text-primary">
             <Car size={24} />
           </div>
@@ -85,9 +85,9 @@ const CustomerDashboard = () => {
             <span className="stat-value">{loading ? '...' : vehicles.length}</span>
             <span className="stat-name">My Vehicles</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/customer/bookings" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-amber-subtle text-amber">
             <Clock size={24} />
           </div>
@@ -95,9 +95,9 @@ const CustomerDashboard = () => {
             <span className="stat-value">{loading ? '...' : activeBookings.length}</span>
             <span className="stat-name">Active Bookings</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/customer/bookings" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-purple-subtle text-purple">
             <ClipboardList size={24} />
           </div>
@@ -105,9 +105,9 @@ const CustomerDashboard = () => {
             <span className="stat-value">{loading ? '...' : bookings.length}</span>
             <span className="stat-name">Total Bookings</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="stat-card">
+        <Link to="/customer/service-history" className="stat-card" style={{ textDecoration: 'none' }}>
           <div className="stat-icon-wrap bg-emerald-subtle text-success">
             <CheckCircle2 size={24} />
           </div>
@@ -115,7 +115,7 @@ const CustomerDashboard = () => {
             <span className="stat-value">{loading ? '...' : completedBookings.length}</span>
             <span className="stat-name">Completed Services</span>
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* Highlight: Upcoming Service Card */}

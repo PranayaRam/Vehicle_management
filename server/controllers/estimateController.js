@@ -325,3 +325,57 @@ exports.rejectEstimate = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Get all estimates (Staff, Admin)
+// @route   GET /api/estimates
+// @access  Private (Staff, Admin)
+exports.getAllEstimates = async (req, res, next) => {
+  try {
+    const estimates = await Estimate.find()
+      .populate('customerId', 'name email phone')
+      .populate({
+        path: 'serviceJobId',
+        select: 'jobNumber status reportedProblem',
+        populate: {
+          path: 'vehicleId',
+          select: 'registrationNumber brand model variant'
+        }
+      })
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: estimates.length,
+      data: estimates
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Get customer estimates
+// @route   GET /api/estimates/my
+// @access  Private (Customer)
+exports.getMyEstimates = async (req, res, next) => {
+  try {
+    const estimates = await Estimate.find({ customerId: req.user._id })
+      .populate('customerId', 'name email phone')
+      .populate({
+        path: 'serviceJobId',
+        select: 'jobNumber status reportedProblem',
+        populate: {
+          path: 'vehicleId',
+          select: 'registrationNumber brand model variant'
+        }
+      })
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: estimates.length,
+      data: estimates
+    });
+  } catch (error) {
+    next(error);
+  }
+};

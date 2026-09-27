@@ -20,7 +20,7 @@ import Modal from '../../components/common/Modal';
 import StatusBadge from '../../components/common/StatusBadge';
 import EmptyState from '../../components/common/EmptyState';
 
-const UserManagement = () => {
+const UserManagement = ({ initialRole = 'ALL', staffView = false }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -28,7 +28,11 @@ const UserManagement = () => {
 
   // Filters
   const [search, setSearch] = useState('');
-  const [roleFilter, setRoleFilter] = useState('ALL');
+  const [roleFilter, setRoleFilter] = useState(initialRole);
+
+  useEffect(() => {
+    setRoleFilter(initialRole);
+  }, [initialRole]);
 
   // Modal State
   const [modalOpen, setModalOpen] = useState(false);
@@ -114,15 +118,29 @@ const UserManagement = () => {
     <div className="user-management-page max-w-6xl mx-auto">
       <div className="page-header flex-between mb-6">
         <div>
-          <h1 className="page-title">User & Staff Roster</h1>
-          <p className="page-subtitle">Oversee workshop advisors, technicians, administrators, and registered customers</p>
+          <h1 className="page-title">
+            {initialRole === 'CUSTOMER' || staffView
+              ? 'Customer Accounts & Directory'
+              : initialRole === 'STAFF'
+              ? 'Service Advisors & Staff Roster'
+              : 'User & Staff Roster'}
+          </h1>
+          <p className="page-subtitle">
+            {initialRole === 'CUSTOMER' || staffView
+              ? 'View and manage registered customers, vehicle owners, and contact details'
+              : initialRole === 'STAFF'
+              ? 'Oversee active service advisors, workshop technicians, and garage staff accounts'
+              : 'Oversee workshop advisors, technicians, administrators, and registered customers'}
+          </p>
         </div>
-        <button
-          onClick={() => setModalOpen(true)}
-          className="btn btn-primary flex items-center gap-2"
-        >
-          <UserPlus size={16} /> Onboard Staff Member
-        </button>
+        {!staffView && initialRole !== 'CUSTOMER' && (
+          <button
+            onClick={() => setModalOpen(true)}
+            className="btn btn-primary flex items-center gap-2"
+          >
+            <UserPlus size={16} /> Onboard Staff Member
+          </button>
+        )}
       </div>
 
       {successMsg && (
