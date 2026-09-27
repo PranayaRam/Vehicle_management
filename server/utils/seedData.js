@@ -193,8 +193,10 @@ const labourList = [
 
 const seedDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/vehicle_management');
-    console.log('[Seed] Connected to MongoDB');
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/vehicle_management');
+      console.log('[Seed] Connected to MongoDB');
+    }
 
     // Clean up and recreate demo users
     for (const u of users) {
@@ -257,10 +259,16 @@ const seedDB = async () => {
 
     console.log('[Seed] Database initialization complete!');
 
-    process.exit(0);
+    if (require.main === module) {
+      process.exit(0);
+    }
+    return true;
   } catch (error) {
     console.error(`[Seed Error] ${error.message}`);
-    process.exit(1);
+    if (require.main === module) {
+      process.exit(1);
+    }
+    throw error;
   }
 };
 

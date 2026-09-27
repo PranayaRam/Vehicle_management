@@ -7,16 +7,69 @@ const errorHandler = require('./middleware/errorHandler');
 // Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
-connectDB();
+const path = require('path');
+const fs = require('fs');
+
+// Connect to MongoDB and auto-seed if fresh database
+connectDB().then(async () => {
+  try {
+    const User = require('./models/User');
+    const userCount = await User.countDocuments();
+    if (userCount === 0) {
+      console.log('[Server] Fresh database detected. Auto-seeding initial users and catalogue...');
+      const seedDB = require('./utils/seedData');
+      await seedDB();
+      console.log('[Server] Auto-seeding complete.');
+    }
+  } catch (err) {
+    console.warn('[Server] Auto-seed check notice:', err.message);
+  }
+});
 
 const app = express();
 
-// Core Middleware
+// Configurable CORS for production & development
+const configuredOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((url) => url.trim().replace(/\/$/, ''))
+  : [];
+
+const localOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:3000',
+  'http://localhost:5000',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:5174'
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true
+  origin: (origin, callback) => {
+    // Allow non-browser requests (mobile apps, Postman, curl, Render health checks)
+    if (!origin) return callback(null, true);
+
+    // Allow configured origins, all .onrender.com domains, localhost, or if wildcard specified
+    if (
+      configuredOrigins.includes('*') ||
+      configuredOrigins.includes(origin) ||
+      localOrigins.includes(origin) ||
+      origin.endsWith('.onrender.com') ||
+      process.env.NODE_ENV !== 'production'
+    ) {
+      return callback(null, true);
+    }
+
+    // Default allow if CLIENT_URL not explicitly configured
+    if (configuredOrigins.length === 0) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS policy blocked access from origin: ${origin}`));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -47,14 +100,31 @@ app.use('/api/delivery', require('./routes/deliveryRoutes'));
 app.use('/api/deliveries', require('./routes/deliveryRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
+// Serve frontend build if dist directory exists (Single-service fullstack deployment mode)
+const clientDistPath = path.join(__dirname, '../client/dist');
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.originalUrl.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
-
-
-// 404 Handler for undefined routes
-app.use('*', (req, res) => {
+// 404 Handler for undefined API routes
+app.use('/api/*', (req, res) => {
   res.status(404).json({
     success: false,
     message: `API endpoint ${req.originalUrl} not found`
+  });
+});
+
+// Fallback 404 Handler for undefined routes
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Endpoint ${req.originalUrl} not found`
   });
 });
 
