@@ -20,11 +20,12 @@ import {
   Truck,
   History,
   Settings,
-  User
+  User,
+  X
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { user } = useAuth();
 
   const getLinks = () => {
@@ -84,33 +85,55 @@ const Sidebar = () => {
   const links = getLinks();
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-brand">
-        <div className="brand-icon">
-          <Wrench size={20} className="text-white" />
-        </div>
-        <div>
-          <h2 className="brand-title">APEX MOTORS</h2>
-          <span className="role-tag">{user?.role} PORTAL</span>
-        </div>
-      </div>
+    <>
+      {/* Mobile Drawer Backdrop Overlay */}
+      {isOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
-      <nav className="sidebar-nav">
-        {links.map((link) => {
-          const Icon = link.icon;
-          return (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
-            >
-              <Icon size={18} className="link-icon" />
-              <span>{link.label}</span>
-            </NavLink>
-          );
-        })}
-      </nav>
-    </aside>
+      <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
+        <div className="sidebar-brand">
+          <div className="brand-icon">
+            <Wrench size={20} className="text-white" />
+          </div>
+          <div className="brand-text-wrap">
+            <h2 className="brand-title">APEX MOTORS</h2>
+            <span className="role-tag">{user?.role} PORTAL</span>
+          </div>
+
+          {/* Close button visible only on mobile/tablet drawer */}
+          <button
+            type="button"
+            className="sidebar-close-btn"
+            onClick={onClose}
+            aria-label="Close navigation menu"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <nav className="sidebar-nav">
+          {links.map((link) => {
+            const Icon = link.icon;
+            return (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={onClose}
+                className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+              >
+                <Icon size={18} className="link-icon" />
+                <span>{link.label}</span>
+              </NavLink>
+            );
+          })}
+        </nav>
+      </aside>
+    </>
   );
 };
 

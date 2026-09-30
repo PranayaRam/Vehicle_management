@@ -106,6 +106,48 @@ const Navbar = () => {
           >
             Contact
           </NavLink>
+
+          <div className="mobile-nav-divider" />
+
+          {isAuthenticated ? (
+            <div className="mobile-nav-auth">
+              <Link
+                to={getDashboardPath(user?.role)}
+                className="btn btn-outline btn-sm btn-block"
+                onClick={() => setMobileOpen(false)}
+              >
+                <LayoutDashboard size={16} />
+                <span>Dashboard ({user?.role})</span>
+              </Link>
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  handleLogout();
+                }}
+                className="btn btn-ghost btn-sm btn-block"
+              >
+                <LogOut size={16} />
+                <span>Log Out</span>
+              </button>
+            </div>
+          ) : (
+            <div className="mobile-nav-auth">
+              <Link
+                to="/login"
+                className="btn btn-outline btn-sm btn-block"
+                onClick={() => setMobileOpen(false)}
+              >
+                Log In
+              </Link>
+              <Link
+                to="/register"
+                className="btn btn-primary btn-sm btn-block"
+                onClick={() => setMobileOpen(false)}
+              >
+                Book a Service
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>

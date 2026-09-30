@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { User, LogOut, Bell, ShieldCheck } from 'lucide-react';
+import { User, LogOut, Bell, ShieldCheck, Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const Topbar = () => {
+const Topbar = ({ onToggleSidebar }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -29,8 +29,19 @@ const Topbar = () => {
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <h3 className="topbar-greeting">Welcome back, {user?.name}</h3>
-        <span className="topbar-sub">Vehicle Service Management System</span>
+        <button
+          type="button"
+          className="mobile-sidebar-toggle"
+          onClick={onToggleSidebar}
+          aria-label="Toggle Navigation Menu"
+          title="Open Menu"
+        >
+          <Menu size={22} />
+        </button>
+        <div className="topbar-title-wrap">
+          <h3 className="topbar-greeting">Welcome back, {user?.name}</h3>
+          <span className="topbar-sub">Vehicle Service Management System</span>
+        </div>
       </div>
 
       <div className="topbar-right">
