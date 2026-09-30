@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Wrench,
@@ -14,10 +14,44 @@ import {
   ChevronRight,
   Cpu,
   Layers,
-  Check
+  Check,
+  Shield,
+  Truck,
+  FileCheck
 } from 'lucide-react';
 
 const Home = () => {
+  const [calcSegment, setCalcSegment] = useState('Sedan');
+  const [calcService, setCalcService] = useState('PERIODIC');
+
+  const estimatorData = {
+    Hatchback: {
+      PERIODIC: { price: '₹2,499', time: '3 Hours', items: ['Engine Synthetic Oil & Filter', 'Air Filter Cleaned', '40-Point Safety Check', 'Complete Exterior Wash'] },
+      BRAKES: { price: '₹1,299', time: '1.5 Hours', items: ['Brake Pad Thickness Check', 'Rotor Lathe Skimming', 'DOT-4 Fluid Bleeding', 'Handbrake Calibrated'] },
+      AC: { price: '₹1,599', time: '2 Hours', items: ['R134a Gas Pressure Test', 'Condenser Coil Flush', 'Cooling Vent Sanitization', 'Cabin Filter Clean'] },
+      FULL_CARE: { price: '₹4,999', time: '5 Hours', items: ['Periodic Service', 'Wheel Alignment & Balancing', 'OBD-II Diagnostics', 'AC Decontamination'] }
+    },
+    Sedan: {
+      PERIODIC: { price: '₹2,999', time: '3.5 Hours', items: ['Engine Synthetic Oil & Filter', 'Air Filter Cleaned', '40-Point Safety Check', 'Complete Exterior Wash'] },
+      BRAKES: { price: '₹1,499', time: '2 Hours', items: ['Brake Pad Thickness Check', 'Rotor Lathe Skimming', 'DOT-4 Fluid Bleeding', 'Handbrake Calibrated'] },
+      AC: { price: '₹1,899', time: '2 Hours', items: ['R134a Gas Pressure Test', 'Condenser Coil Flush', 'Cooling Vent Sanitization', 'Cabin Filter Clean'] },
+      FULL_CARE: { price: '₹5,899', time: '5.5 Hours', items: ['Periodic Service', 'Wheel Alignment & Balancing', 'OBD-II Diagnostics', 'AC Decontamination'] }
+    },
+    SUV: {
+      PERIODIC: { price: '₹3,799', time: '4 Hours', items: ['Heavy-Duty Synthetic Oil & Filter', 'Air Filter Cleaned', '40-Point Safety Check', 'Underbody & Engine Wash'] },
+      BRAKES: { price: '₹1,899', time: '2.5 Hours', items: ['Heavy Disc Pad Inspection', 'Rotor Lathe Skimming', 'DOT-4 Fluid Bleeding', 'Caliper Pin Greasing'] },
+      AC: { price: '₹2,299', time: '2.5 Hours', items: ['Dual Evaporator Gas Fill', 'Condenser Coil Flush', 'Antibacterial Sanitization', 'Cabin Pollen Filter'] },
+      FULL_CARE: { price: '₹7,499', time: '6 Hours', items: ['Full Periodic Service', '4-Wheel 3D Laser Alignment', 'Suspension & Bush Check', 'AC Deep Service'] }
+    },
+    Luxury: {
+      PERIODIC: { price: '₹6,499', time: '4.5 Hours', items: ['OEM European Spec Synthetic Oil', 'OEM Oil & Fuel Filter', 'OBD-II Diagnostic Scan', 'Executive Interior Spa'] },
+      BRAKES: { price: '₹3,499', time: '3 Hours', items: ['Ceramic Pad Fitment', 'Electronic Caliper Reset', 'DOT 5.1 Fluid Bleed', 'Rotor Thickness Micrometer'] },
+      AC: { price: '₹3,999', time: '3 Hours', items: ['Multi-Zone Climate Diagnostics', 'Compressor Health Test', 'Ozone Odor Purifier', 'HEPA Cabin Filter'] },
+      FULL_CARE: { price: '₹12,999', time: '7 Hours', items: ['Master Executive Service', 'Diagnostic ECU Live Scan', 'Air Suspension Calibrate', 'Full Detailing Sealant'] }
+    }
+  };
+
+  const currentEst = estimatorData[calcSegment][calcService];
   const workflowSteps = [
     { num: '01', title: 'Customer Booking', desc: 'Select your vehicle, pick a convenient time slot and state any problems.' },
     { num: '02', title: 'Vehicle Check-In', desc: 'Staff logs odometer, fuel level, initial damages and customer remarks.' },
@@ -139,7 +173,12 @@ const Home = () => {
           </div>
 
           <div className="hero-visual">
-            <div className="hero-image-card">
+            <div className="hero-image-card" style={{ position: 'relative' }}>
+              <div className="rating-pill" style={{ position: 'absolute', top: '-14px', right: '-10px', zIndex: 10 }}>
+                <Star size={14} className="text-amber-500 fill-amber-500" />
+                <span>4.9 / 5</span>
+                <span className="text-muted font-normal text-[11px]">(1,450+ Verified Reviews)</span>
+              </div>
               <img
                 src="https://images.unsplash.com/photo-1613214149922-f1809c99b414?auto=format&fit=crop&w=1200&q=80"
                 alt="Modern Automotive Diagnostic Workshop"
@@ -151,7 +190,10 @@ const Home = () => {
                   <span className="text-muted text-xs font-mono">JOB #SJ-1002</span>
                 </div>
                 <h3 className="overlay-vehicle-name">Hyundai Creta 1.5 SX</h3>
-                <p className="overlay-reg-plate">MH 12 AB 1234</p>
+                <div className="license-plate my-1">
+                  <span className="plate-ind">IND</span>
+                  <span className="plate-num">MH 12 AB 1234</span>
+                </div>
                 <div className="hero-progress-bar">
                   <div className="progress-fill" style={{ width: '65%' }}></div>
                 </div>
@@ -167,6 +209,53 @@ const Home = () => {
                   <strong className="block text-xs text-dark">OEM Certified</strong>
                   <span className="text-[11px] text-muted">40-Point Digital Safety QA</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Automotive Trust & Assurance Strip */}
+      <section className="trust-strip">
+        <div className="container">
+          <div className="trust-grid">
+            <div className="trust-item">
+              <div className="trust-icon-box">
+                <ShieldCheck size={22} />
+              </div>
+              <div>
+                <h4 className="trust-title">100% Genuine OEM Parts</h4>
+                <p className="trust-sub">Authorized brand-certified components</p>
+              </div>
+            </div>
+
+            <div className="trust-item">
+              <div className="trust-icon-box">
+                <Clock size={22} />
+              </div>
+              <div>
+                <h4 className="trust-title">6-Month Service Warranty</h4>
+                <p className="trust-sub">Complete coverage on parts & labor</p>
+              </div>
+            </div>
+
+            <div className="trust-item">
+              <div className="trust-icon-box">
+                <FileCheck size={22} />
+              </div>
+              <div>
+                <h4 className="trust-title">Mandatory Customer Sign-Off</h4>
+                <p className="trust-sub">Zero hidden charges or surprises</p>
+              </div>
+            </div>
+
+            <div className="trust-item">
+              <div className="trust-icon-box">
+                <Truck size={22} />
+              </div>
+              <div>
+                <h4 className="trust-title">Doorstep Pickup & Drop</h4>
+                <p className="trust-sub">Safe contactless valet vehicle transit</p>
               </div>
             </div>
           </div>
@@ -234,6 +323,109 @@ const Home = () => {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Service Cost Estimator Widget */}
+      <section className="py-12 bg-slate-50 border-t border-b border-border">
+        <div className="container max-w-4xl">
+          <div className="section-header text-center mb-8">
+            <span className="section-tag">Instant Transparent Calculation</span>
+            <h2 className="section-title">Calculate Your Service Cost In Real Time</h2>
+            <p className="section-sub">
+              Select your vehicle body category and preferred package to inspect turnaround time and itemized coverage.
+            </p>
+          </div>
+
+          <div className="estimator-card">
+            {/* Step 1: Vehicle Segment */}
+            <div className="mb-6">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+                1. Select Vehicle Segment
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { id: 'Hatchback', label: 'Hatchback', sub: 'i20, Swift, Polo' },
+                  { id: 'Sedan', label: 'Executive Sedan', sub: 'City, Verna, Ciaz' },
+                  { id: 'SUV', label: 'Compact / Full SUV', sub: 'Creta, Harrier, XUV' },
+                  { id: 'Luxury', label: 'Luxury European', sub: 'BMW, Mercedes, Audi' }
+                ].map((seg) => (
+                  <button
+                    key={seg.id}
+                    type="button"
+                    onClick={() => setCalcSegment(seg.id)}
+                    className={`segment-btn ${calcSegment === seg.id ? 'active' : ''}`}
+                  >
+                    <Car size={16} />
+                    <div className="text-left">
+                      <div>{seg.label}</div>
+                      <span className="text-[10px] text-muted block font-normal">{seg.sub}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 2: Service Package */}
+            <div className="mb-6">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+                2. Select Service Package
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { id: 'PERIODIC', label: 'General Service', icon: Wrench },
+                  { id: 'BRAKES', label: 'Brake Overhaul', icon: ShieldCheck },
+                  { id: 'AC', label: 'AC Climate Care', icon: Sparkles },
+                  { id: 'FULL_CARE', label: 'Complete Overhaul', icon: PenTool }
+                ].map((pkg) => {
+                  const Icon = pkg.icon;
+                  return (
+                    <button
+                      key={pkg.id}
+                      type="button"
+                      onClick={() => setCalcService(pkg.id)}
+                      className={`segment-btn ${calcService === pkg.id ? 'active' : ''}`}
+                    >
+                      <Icon size={16} />
+                      <span>{pkg.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Calculated Output Display */}
+            <div className="bg-slate-50 rounded-xl p-5 border border-border flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <span className="text-xs font-semibold text-muted block mb-1">
+                  Estimated Transparent Quote ({calcSegment}):
+                </span>
+                <div className="flex items-baseline gap-3">
+                  <span className="text-3xl font-extrabold text-primary font-mono">{currentEst.price}</span>
+                  <span className="text-xs text-muted font-mono flex items-center gap-1">
+                    <Clock size={13} /> {currentEst.time}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 mt-3">
+                  {currentEst.items.map((item, idx) => (
+                    <span key={idx} className="text-xs text-slate-700 flex items-center gap-1.5">
+                      <CheckCircle2 size={13} className="text-emerald-600 flex-shrink-0" /> {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex-shrink-0 w-full md:w-auto">
+                <Link to="/customer/book" className="btn btn-primary btn-lg w-full md:w-auto flex items-center justify-center gap-2">
+                  <span>Book This Service</span>
+                  <ArrowRight size={16} />
+                </Link>
+                <span className="text-[11px] text-muted text-center block mt-1.5">
+                  100% digital approval before service
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

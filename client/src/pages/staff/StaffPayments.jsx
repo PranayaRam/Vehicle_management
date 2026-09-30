@@ -173,7 +173,7 @@ const StaffPayments = () => {
                         <td className="font-mono font-bold text-primary">{p.transactionReference}</td>
                         <td className="font-mono text-xs">{inv?.invoiceNumber || 'INV-Direct'}</td>
                         <td>
-                          <div className="font-semibold text-white">{cust?.name || 'Customer'}</div>
+                          <div className="font-semibold text-dark">{cust?.name || 'Customer'}</div>
                           <span className="text-xs text-muted">{cust?.phone}</span>
                         </td>
                         <td>
@@ -181,14 +181,14 @@ const StaffPayments = () => {
                           <span className="text-xs text-muted font-mono">{veh?.registrationNumber}</span>
                         </td>
                         <td>
-                          <span className="badge font-mono text-xs px-2 py-0.5 rounded bg-black/40 text-gray-200 border border-border">
+                          <span className="badge font-mono text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-border">
                             {p.paymentMethod}
                           </span>
                         </td>
-                        <td className="font-mono font-bold text-sm text-emerald-400">
+                        <td className="font-mono font-bold text-sm text-emerald-600">
                           ₹{p.amount?.toLocaleString()}
                         </td>
-                        <td className="text-xs text-gray-300">
+                        <td className="text-xs text-slate-600">
                           {p.recordedBy?.name || 'Reception Staff'}
                         </td>
                         <td className="text-xs text-muted">

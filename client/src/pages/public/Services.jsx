@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Wrench,
@@ -15,8 +15,19 @@ import {
 } from 'lucide-react';
 
 const Services = () => {
+  const [activeCategory, setActiveCategory] = useState('ALL');
+
+  const categories = [
+    { id: 'ALL', label: 'All Services (6)' },
+    { id: 'PERIODIC', label: 'Periodic Maintenance' },
+    { id: 'BRAKES', label: 'Brakes & Suspension' },
+    { id: 'AC', label: 'Climate & Electrical' },
+    { id: 'ENGINE', label: 'Engine Diagnostics' }
+  ];
+
   const serviceCatalog = [
     {
+      category: 'PERIODIC',
       name: 'General Periodic Service',
       time: '3 - 4 Hours',
       price: 'Starting from ₹2,999',
@@ -32,6 +43,7 @@ const Services = () => {
       ]
     },
     {
+      category: 'BRAKES',
       name: 'Brake System Service & Overhaul',
       time: '2 Hours',
       price: 'Starting from ₹1,499',
@@ -46,6 +58,7 @@ const Services = () => {
       ]
     },
     {
+      category: 'AC',
       name: 'Climate Control (AC) Servicing',
       time: '2 - 3 Hours',
       price: 'Starting from ₹1,899',
@@ -60,6 +73,7 @@ const Services = () => {
       ]
     },
     {
+      category: 'ENGINE',
       name: 'Engine Diagnostics & Tuning',
       time: '2 - 4 Hours',
       price: 'Starting from ₹1,999',
@@ -74,6 +88,7 @@ const Services = () => {
       ]
     },
     {
+      category: 'BRAKES',
       name: 'Tyre, Wheel & Suspension',
       time: '1.5 Hours',
       price: 'Starting from ₹999',
@@ -88,6 +103,7 @@ const Services = () => {
       ]
     },
     {
+      category: 'AC',
       name: 'Battery & Electrical Diagnosis',
       time: '1 Hour',
       price: 'Starting from ₹499',
@@ -103,10 +119,14 @@ const Services = () => {
     }
   ];
 
+  const filteredCatalog = activeCategory === 'ALL'
+    ? serviceCatalog
+    : serviceCatalog.filter(s => s.category === activeCategory);
+
   return (
     <div className="services-page py-12">
       <div className="container">
-        <div className="section-header text-center mb-10">
+        <div className="section-header text-center mb-8">
           <span className="section-tag">Factory-Grade Precision</span>
           <h1 className="section-title">Automotive Service Catalog</h1>
           <p className="section-sub">
@@ -114,8 +134,21 @@ const Services = () => {
           </p>
         </div>
 
+        {/* Category Filter Tabs Bar */}
+        <div className="filter-tabs-bar">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`filter-tab-pill ${activeCategory === cat.id ? 'active' : ''}`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
         <div className="catalog-grid">
-          {serviceCatalog.map((svc, idx) => (
+          {filteredCatalog.map((svc, idx) => (
             <div key={idx} className="catalog-card">
               <div className="catalog-media-header">
                 <img

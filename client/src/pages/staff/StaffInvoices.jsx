@@ -179,8 +179,8 @@ const StaffInvoices = () => {
               onClick={() => setStatusFilter(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                 statusFilter === tab.id
-                  ? 'bg-primary text-black font-bold'
-                  : 'bg-[#111622] text-gray-400 border border-border hover:border-gray-500'
+                  ? 'bg-primary text-white font-bold'
+                  : 'bg-slate-100 text-slate-600 border border-border hover:bg-slate-200'
               }`}
             >
               {tab.label}
@@ -236,7 +236,7 @@ const StaffInvoices = () => {
                       <tr key={inv._id}>
                         <td className="font-mono font-bold text-primary">{inv.invoiceNumber}</td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {veh?.brand} {veh?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{veh?.registrationNumber}</span>
@@ -246,7 +246,7 @@ const StaffInvoices = () => {
                           <span className="text-xs text-muted">{cust?.phone}</span>
                         </td>
                         <td className="font-mono font-bold">₹{inv.total?.toLocaleString()}</td>
-                        <td className="font-mono text-xs text-gray-300">
+                        <td className="font-mono text-xs text-slate-600">
                           ₹{(inv.amountPaid || 0).toLocaleString()}
                         </td>
                         <td className="font-mono text-xs font-semibold text-amber-400">
@@ -314,13 +314,13 @@ const StaffInvoices = () => {
                 <span className="font-mono text-slate-700">₹{(paymentInvoice.amountPaid || 0).toLocaleString()}</span>
               </div>
               <div className="flex-between border-t border-border pt-1 font-bold">
-                <span className="text-white">Balance Due:</span>
+                <span className="text-dark">Balance Due:</span>
                 <span className="font-mono text-primary">₹{(paymentInvoice.total - (paymentInvoice.amountPaid || 0)).toLocaleString()}</span>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Amount to Record (₹)</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Amount to Record (₹)</label>
               <input
                 type="number"
                 required

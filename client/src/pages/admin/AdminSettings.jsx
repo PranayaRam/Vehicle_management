@@ -54,12 +54,12 @@ const AdminSettings = () => {
       <form onSubmit={handleSave} className="space-y-6">
         {/* Business Profile */}
         <div className="content-card p-6">
-          <h3 className="card-title mb-4 flex items-center gap-2 text-white">
+          <h3 className="card-title mb-4 flex items-center gap-2 text-dark">
             <Building size={18} className="text-primary" /> Workshop Entity & Location
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Workshop Legal Name</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Workshop Legal Name</label>
               <input
                 type="text"
                 required
@@ -70,7 +70,7 @@ const AdminSettings = () => {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Central Hub Address</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Central Hub Address</label>
               <textarea
                 rows={2}
                 required
@@ -81,7 +81,7 @@ const AdminSettings = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Customer Care Phone</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Customer Care Phone</label>
               <input
                 type="text"
                 required
@@ -92,7 +92,7 @@ const AdminSettings = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Support Email</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Support Email</label>
               <input
                 type="email"
                 required
@@ -106,12 +106,12 @@ const AdminSettings = () => {
 
         {/* Operating Hours & Tax */}
         <div className="content-card p-6">
-          <h3 className="card-title mb-4 flex items-center gap-2 text-white">
+          <h3 className="card-title mb-4 flex items-center gap-2 text-dark">
             <Clock size={18} className="text-primary" /> Timings & Tax Configurations
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Operating Hours</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Operating Hours</label>
               <input
                 type="text"
                 required
@@ -122,22 +122,22 @@ const AdminSettings = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">GST Tax Rate (%)</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">GST Tax Rate (%)</label>
               <input
                 type="number"
                 disabled
-                className="form-input w-full opacity-70 bg-black/20"
+                className="form-input w-full opacity-70 bg-slate-100"
                 value={settings.taxRate}
               />
               <span className="text-[11px] text-muted mt-1 block">Configured via server .env (TAX_RATE=0.18)</span>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Billing Currency</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Billing Currency</label>
               <input
                 type="text"
                 disabled
-                className="form-input w-full opacity-70 bg-black/20"
+                className="form-input w-full opacity-70 bg-slate-100"
                 value={settings.currency}
               />
             </div>
@@ -146,8 +146,8 @@ const AdminSettings = () => {
 
         {/* System Diagnostics */}
         <div className="content-card p-6">
-          <h3 className="card-title mb-4 flex items-center gap-2 text-white">
-            <Server size={18} className="text-emerald-400" /> Infrastructure & Environment Health
+          <h3 className="card-title mb-4 flex items-center gap-2 text-dark">
+            <Server size={18} className="text-emerald-600" /> Infrastructure & Environment Health
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
             <div className="p-3 rounded-xl bg-slate-50 border border-border">

@@ -90,8 +90,8 @@ const StaffInspections = () => {
         <div className="content-card mb-6 border-l-4 border-l-amber-500 p-5 bg-amber-500/5">
           <div className="flex-between flex-wrap gap-4">
             <div>
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <ShieldAlert size={18} className="text-amber-400" />
+              <h3 className="text-sm font-bold text-dark flex items-center gap-2">
+                <ShieldAlert size={18} className="text-amber-500" />
                 <span>{pendingInspectionJobs.length} Vehicle(s) Awaiting Diagnostic Inspection</span>
               </h3>
               <p className="text-xs text-muted mt-1">
@@ -166,7 +166,7 @@ const StaffInspections = () => {
                           </Link>
                         </td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {veh?.brand} {veh?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{veh?.registrationNumber}</span>

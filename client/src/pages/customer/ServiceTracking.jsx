@@ -86,8 +86,8 @@ const ServiceTracking = () => {
 
           {pastJobs.length > 0 && (
             <div className="content-card p-6">
-              <h3 className="card-title mb-4 flex items-center gap-2 text-white">
-                <CheckCircle2 size={18} className="text-emerald-400" /> Recently Completed Services
+              <h3 className="card-title mb-4 flex items-center gap-2 text-dark">
+                <CheckCircle2 size={18} className="text-emerald-600" /> Recently Completed Services
               </h3>
               <div className="table-responsive">
                 <table className="data-table">
@@ -106,7 +106,7 @@ const ServiceTracking = () => {
                       <tr key={job._id}>
                         <td className="font-mono font-bold text-primary">{job.jobNumber}</td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {job.vehicleId?.brand} {job.vehicleId?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{job.vehicleId?.registrationNumber}</span>

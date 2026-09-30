@@ -159,7 +159,7 @@ const StaffEstimates = () => {
                         <td className="font-mono font-bold text-primary">{est.estimateNumber}</td>
                         <td className="font-mono text-xs">{job?.jobNumber || 'SJ-General'}</td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {veh?.brand} {veh?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{veh?.registrationNumber}</span>
@@ -174,8 +174,8 @@ const StaffEstimates = () => {
                             {est.parts?.length || 0} parts, {est.labour?.length || 0} tasks
                           </span>
                         </td>
-                        <td className="font-mono text-xs text-gray-300">₹{est.tax?.toLocaleString()}</td>
-                        <td className="font-mono font-bold text-sm text-white">₹{est.total?.toLocaleString()}</td>
+                        <td className="font-mono text-xs text-slate-600">₹{est.tax?.toLocaleString()}</td>
+                        <td className="font-mono font-bold text-sm text-dark">₹{est.total?.toLocaleString()}</td>
                         <td>
                           <StatusBadge status={est.status} />
                         </td>

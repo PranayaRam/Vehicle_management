@@ -110,7 +110,7 @@ const AdminReports = () => {
           {/* Workflow Stage Throughput */}
           <div className="content-card p-6">
             <div className="card-header border-b border-border pb-3 mb-4 flex-between">
-              <h3 className="card-title flex items-center gap-2 text-white">
+              <h3 className="card-title flex items-center gap-2 text-dark">
                 <BarChart3 size={18} className="text-primary" /> Active Workshop Stage Volume Distribution
               </h3>
               <span className="text-xs text-muted">Real-time database audit</span>
@@ -129,10 +129,10 @@ const AdminReports = () => {
                 const count = statusBreakdown[stage.key] || 0;
                 return (
                   <div key={stage.key} className={`p-3 rounded-xl border text-center ${stage.color}`}>
-                    <span className="text-2xl font-extrabold font-mono text-white block mb-1">
+                    <span className="text-2xl font-extrabold font-mono text-dark block mb-1">
                       {count}
                     </span>
-                    <span className="text-[11px] font-semibold text-gray-300 block line-clamp-1">
+                    <span className="text-[11px] font-semibold text-slate-600 block line-clamp-1">
                       {stage.label}
                     </span>
                   </div>
@@ -144,8 +144,8 @@ const AdminReports = () => {
           {/* Low Stock Parts Audit Table */}
           <div className="content-card">
             <div className="card-header flex-between">
-              <h3 className="card-title flex items-center gap-2 text-white">
-                <AlertTriangle size={18} className="text-amber-400" /> Critical Inventory Alerts
+              <h3 className="card-title flex items-center gap-2 text-dark">
+                <AlertTriangle size={18} className="text-amber-500" /> Critical Inventory Alerts
               </h3>
               <span className="text-xs text-muted">Stock below or at minimum safety buffer</span>
             </div>
@@ -170,7 +170,7 @@ const AdminReports = () => {
                     <tbody>
                       {lowStockParts.map((p) => (
                         <tr key={p._id}>
-                          <td className="font-semibold text-white">{p.name}</td>
+                          <td className="font-semibold text-dark">{p.name}</td>
                           <td className="font-mono text-muted">{p.partNumber}</td>
                           <td className="font-mono font-bold text-amber-400">{p.stockQuantity} in stock</td>
                           <td className="text-muted">Min: {p.minimumStock}</td>

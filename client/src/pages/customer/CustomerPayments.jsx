@@ -189,7 +189,7 @@ const CustomerPayments = () => {
                       <tr key={inv._id}>
                         <td className="font-mono font-bold text-primary">{inv.invoiceNumber}</td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {inv.vehicleId?.brand} {inv.vehicleId?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{inv.vehicleId?.registrationNumber}</span>
@@ -199,7 +199,7 @@ const CustomerPayments = () => {
                           {new Date(inv.createdAt).toLocaleDateString()}
                         </td>
                         <td className="font-mono font-bold">₹{inv.total?.toLocaleString()}</td>
-                        <td className="font-mono text-xs text-gray-300">
+                        <td className="font-mono text-xs text-slate-600">
                           ₹{(inv.amountPaid || 0).toLocaleString()}
                         </td>
                         <td>
@@ -254,14 +254,14 @@ const CustomerPayments = () => {
               </div>
               <div className="flex-between mb-2">
                 <span className="text-xs text-muted">Invoice Subtotal:</span>
-                <span className="text-sm font-mono text-gray-300">₹{selectedInvoice.subtotal?.toLocaleString()}</span>
+                <span className="text-sm font-mono text-slate-700">₹{selectedInvoice.subtotal?.toLocaleString()}</span>
               </div>
               <div className="flex-between mb-2">
                 <span className="text-xs text-muted">18% GST:</span>
-                <span className="text-sm font-mono text-gray-300">₹{selectedInvoice.tax?.toLocaleString()}</span>
+                <span className="text-sm font-mono text-slate-700">₹{selectedInvoice.tax?.toLocaleString()}</span>
               </div>
               <div className="flex-between border-t border-border pt-2">
-                <span className="text-sm font-bold text-white">Remaining Balance:</span>
+                <span className="text-sm font-bold text-dark">Remaining Balance:</span>
                 <span className="text-lg font-bold font-mono text-primary">
                   ₹{(selectedInvoice.total - (selectedInvoice.amountPaid || 0)).toLocaleString()}
                 </span>
@@ -269,7 +269,7 @@ const CustomerPayments = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-2">Select Payment Method</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-2">Select Payment Method</label>
               <div className="grid grid-cols-3 gap-3">
                 {['UPI', 'CARD', 'CASH'].map((method) => (
                   <button
@@ -279,7 +279,7 @@ const CustomerPayments = () => {
                     className={`py-3 px-3 rounded-xl border text-center font-semibold text-xs transition-all ${
                       paymentMethod === method
                         ? 'border-primary bg-amber-500/10 text-primary'
-                        : 'border-border bg-black/20 text-gray-400 hover:border-gray-500'
+                        : 'border-border bg-white text-slate-700 hover:border-slate-400'
                     }`}
                   >
                     {method}

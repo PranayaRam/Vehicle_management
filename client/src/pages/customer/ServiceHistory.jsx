@@ -106,7 +106,7 @@ const ServiceHistory = () => {
               <Car size={20} className="text-primary flex-shrink-0" />
               <div>
                 <span className="text-xs text-muted block">Viewing Service History For:</span>
-                <span className="text-sm font-bold text-white">
+                <span className="text-sm font-bold text-dark">
                   {selectedVehicle?.brand} {selectedVehicle?.model} ({selectedVehicle?.registrationNumber})
                 </span>
               </div>
@@ -135,8 +135,8 @@ const ServiceHistory = () => {
           ) : history.length === 0 ? (
             <div className="content-card p-8 text-center">
               <History size={36} className="text-muted mx-auto mb-2" />
-              <h3 className="text-md font-bold text-white mb-1">No Past Services Completed Yet</h3>
-              <p className="text-gray-400 text-xs max-w-md mx-auto mb-4">
+              <h3 className="text-md font-bold text-dark mb-1">No Past Services Completed Yet</h3>
+              <p className="text-muted text-xs max-w-md mx-auto mb-4">
                 Completed services with signed delivery handovers for this vehicle will appear here automatically.
               </p>
               <Link to="/customer/book" className="btn btn-primary btn-sm">
@@ -158,13 +158,13 @@ const ServiceHistory = () => {
                           </span>
                         </div>
                         <p className="text-xs text-muted font-mono">
-                          Vehicle Mileage: <strong className="text-white">{job?.vehicleId?.currentMileage?.toLocaleString()} km</strong>
+                          Vehicle Mileage: <strong className="text-dark">{job?.vehicleId?.currentMileage?.toLocaleString()} km</strong>
                         </p>
                       </div>
 
                       <div className="text-right text-xs text-muted">
-                        <div>Delivered to: <strong className="text-white">{delivery?.recipientName || 'Customer'}</strong></div>
-                        <div>Date: <span className="font-mono text-gray-300">{new Date(delivery?.deliveryDate || job?.updatedAt).toLocaleDateString()}</span></div>
+                        <div>Delivered to: <strong className="text-dark">{delivery?.recipientName || 'Customer'}</strong></div>
+                        <div>Date: <span className="font-mono text-slate-700">{new Date(delivery?.deliveryDate || job?.updatedAt).toLocaleDateString()}</span></div>
                       </div>
                     </div>
 

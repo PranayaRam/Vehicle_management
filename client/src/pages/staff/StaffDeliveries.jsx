@@ -79,7 +79,7 @@ const StaffDeliveries = () => {
           className={`pb-3 px-4 font-semibold text-sm border-b-2 flex items-center gap-2 transition-colors ${
             activeTab === 'ready'
               ? 'border-primary text-primary'
-              : 'border-transparent text-muted hover:text-white'
+              : 'border-transparent text-muted hover:text-dark'
           }`}
         >
           <Clock size={16} /> Ready for Customer Pickup ({readyJobs.length})
@@ -89,7 +89,7 @@ const StaffDeliveries = () => {
           className={`pb-3 px-4 font-semibold text-sm border-b-2 flex items-center gap-2 transition-colors ${
             activeTab === 'completed'
               ? 'border-primary text-primary'
-              : 'border-transparent text-muted hover:text-white'
+              : 'border-transparent text-muted hover:text-dark'
           }`}
         >
           <CheckCircle2 size={16} /> Completed Handover Ledger ({completedDeliveries.length})
@@ -107,7 +107,7 @@ const StaffDeliveries = () => {
             ) : readyJobs.length === 0 ? (
               <div className="p-8 text-center">
                 <Truck size={36} className="text-muted mx-auto mb-2" />
-                <h3 className="text-sm font-bold text-white mb-1">No Vehicles Currently Queued for Pickup</h3>
+                <h3 className="text-sm font-bold text-dark mb-1">No Vehicles Currently Queued for Pickup</h3>
                 <p className="text-xs text-muted max-w-md mx-auto">
                   Vehicles that pass quality checks and road tests will appear here awaiting customer handover.
                 </p>
@@ -130,7 +130,7 @@ const StaffDeliveries = () => {
                       <tr key={j._id}>
                         <td className="font-mono font-bold text-primary">{j.jobNumber}</td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {j.vehicleId?.brand} {j.vehicleId?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{j.vehicleId?.registrationNumber}</span>
@@ -193,20 +193,20 @@ const StaffDeliveries = () => {
                           {del.serviceJobId?.jobNumber || 'SJ-General'}
                         </td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {del.vehicleId?.brand} {del.vehicleId?.model}
                           </div>
                           <span className="text-xs text-muted font-mono">{del.vehicleId?.registrationNumber}</span>
                         </td>
                         <td>{del.customerId?.name}</td>
                         <td>
-                          <strong className="text-emerald-400">{del.recipientName}</strong>
+                          <strong className="text-emerald-600">{del.recipientName}</strong>
                         </td>
                         <td>{del.deliveredBy?.name || 'Staff'}</td>
                         <td className="text-xs text-muted">
                           {new Date(del.deliveryDate).toLocaleDateString()}
                         </td>
-                        <td className="text-xs text-gray-300 max-w-xs truncate">
+                        <td className="text-xs text-slate-600 max-w-xs truncate">
                           {del.deliveryNotes || 'Vehicle released after payment sign-off'}
                         </td>
                       </tr>

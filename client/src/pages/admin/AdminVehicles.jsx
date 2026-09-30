@@ -174,22 +174,22 @@ const AdminVehicles = () => {
                           </span>
                         </td>
                         <td>
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-dark">
                             {v.brand} {v.model}
                           </div>
                           <span className="text-xs text-muted">{v.variant || 'Standard'}</span>
                         </td>
                         <td className="text-xs">
                           <div>{v.manufacturingYear}</div>
-                          <span className="badge text-[11px] px-2 py-0.2 rounded bg-black/40 text-gray-300 border border-border">
+                          <span className="badge text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-border">
                             {v.fuelType}
                           </span>
                         </td>
-                        <td className="font-mono text-xs text-gray-200">
+                        <td className="font-mono text-xs text-slate-700">
                           {v.currentMileage?.toLocaleString()} km
                         </td>
                         <td>
-                          <div className="font-semibold text-white">{cust?.name || 'Customer'}</div>
+                          <div className="font-semibold text-dark">{cust?.name || 'Customer'}</div>
                           <span className="text-xs text-muted font-mono">{cust?.phone}</span>
                         </td>
                         <td className="text-xs text-muted">
