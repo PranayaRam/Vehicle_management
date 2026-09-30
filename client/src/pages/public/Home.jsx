@@ -41,7 +41,7 @@ const Home = () => {
       title: 'Brake System Overhaul',
       desc: 'Disc resurfacing, ceramic pad replacement, caliper lubrication, and ABS hydraulic diagnostics.',
       icon: ShieldCheck,
-      image: 'https://images.unsplash.com/photo-1600790142055-619df03207e6?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1774066811788-8b9ae29ae09d?auto=format&fit=crop&w=800&q=80',
       tag: 'Safety Critical'
     },
     {

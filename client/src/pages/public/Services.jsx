@@ -35,7 +35,7 @@ const Services = () => {
       name: 'Brake System Service & Overhaul',
       time: '2 Hours',
       price: 'Starting from ₹1,499',
-      image: 'https://images.unsplash.com/photo-1600790142055-619df03207e6?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1774066811788-8b9ae29ae09d?auto=format&fit=crop&w=800&q=80',
       badge: 'Safety Critical',
       features: [
         'Front & rear brake pad thickness measurement',
