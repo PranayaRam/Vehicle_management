@@ -69,9 +69,9 @@ const ServiceTracking = () => {
       ) : activeJobs.length === 0 ? (
         <div className="space-y-6">
           <div className="content-card p-8 text-center">
-            <Wrench size={40} className="text-[#ffb703] mx-auto mb-3 opacity-80" />
-            <h3 className="text-lg font-bold text-white mb-2">No Active Vehicles in Service</h3>
-            <p className="text-gray-400 text-sm max-w-md mx-auto mb-6">
+            <Wrench size={40} className="text-highlight mx-auto mb-3 opacity-90" />
+            <h3 className="text-lg font-bold text-dark mb-2">No Active Vehicles in Service</h3>
+            <p className="text-muted text-sm max-w-md mx-auto mb-6">
               None of your vehicles are currently checked into the workshop bays. When you book and check in your car, you can track its stage-by-stage progress here.
             </p>
             <div className="flex justify-center gap-3">
@@ -139,23 +139,23 @@ const ServiceTracking = () => {
               <div className="flex-between flex-wrap gap-4 border-b border-border pb-4 mb-6">
                 <div>
                   <div className="flex items-center gap-3 mb-1">
-                    <span className="font-mono text-xl font-extrabold text-[#ffb703]">{job.jobNumber}</span>
+                    <span className="font-mono text-xl font-extrabold text-highlight">{job.jobNumber}</span>
                     <StatusBadge status={job.status} />
                   </div>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-lg font-bold text-dark">
                     {job.vehicleId?.brand} {job.vehicleId?.model} {job.vehicleId?.variant}
                   </h3>
-                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-black/40 text-gray-300 border border-border">
+                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-border">
                     {job.vehicleId?.registrationNumber}
                   </span>
                 </div>
 
                 <div className="text-right text-xs text-muted">
                   <div className="mb-1">
-                    Service Advisor: <strong className="text-gray-200">{job.assignedStaffId?.name || 'Vikram Joshi'}</strong>
+                    Service Advisor: <strong className="text-dark">{job.assignedStaffId?.name || 'Vikram Joshi'}</strong>
                   </div>
                   <div>
-                    Intake Date: <span className="font-mono text-gray-300">{new Date(job.createdAt).toLocaleDateString()}</span>
+                    Intake Date: <span className="font-mono text-slate-600">{new Date(job.createdAt).toLocaleDateString()}</span>
                   </div>
                 </div>
               </div>
@@ -166,10 +166,10 @@ const ServiceTracking = () => {
               </div>
 
               {/* Status Context & Action Prompts */}
-              <div className="bg-[#0b0e15] border border-[#232936] rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="bg-slate-50 border border-border rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <h4 className="text-sm font-semibold text-white mb-1">Reported Customer Concern:</h4>
-                  <p className="text-xs text-gray-300 italic mb-2">"{job.reportedProblem || 'Standard Periodic Maintenance'}"</p>
+                  <h4 className="text-sm font-semibold text-dark mb-1">Reported Customer Concern:</h4>
+                  <p className="text-xs text-slate-600 italic mb-2">"{job.reportedProblem || 'Standard Periodic Maintenance'}"</p>
                   
                   {job.status === 'ESTIMATE_PENDING' && (
                     <p className="text-xs text-amber-400 font-semibold flex items-center gap-1.5">

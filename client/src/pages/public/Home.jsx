@@ -7,12 +7,14 @@ import {
   Car,
   CheckCircle2,
   ArrowRight,
-  FileText,
-  DollarSign,
-  Truck,
   Sparkles,
-  Search,
-  PenTool
+  PenTool,
+  Star,
+  Award,
+  ChevronRight,
+  Cpu,
+  Layers,
+  Check
 } from 'lucide-react';
 
 const Home = () => {
@@ -28,12 +30,72 @@ const Home = () => {
   ];
 
   const serviceCategories = [
-    { title: 'Periodic Maintenance', desc: 'Manufacturer scheduled general servicing, synthetic oil, filter replacements, and safety checks.', icon: Wrench },
-    { title: 'Brake System Overhaul', desc: 'Disc resurfacing, ceramic pad replacement, caliper lubrication, and ABS hydraulic diagnostics.', icon: ShieldCheck },
-    { title: 'Climate Control (AC)', desc: 'Refrigerant leak detection, compressor maintenance, condenser flush, and cabin air purification.', icon: Sparkles },
-    { title: 'Engine & Transmission', desc: 'OBD-II computer diagnostics, spark plugs, timing belt check, clutch overhaul, and tuning.', icon: PenTool },
-    { title: 'Suspension & Steering', desc: 'Shock absorber testing, wheel alignment, camber balancing, and steering rack inspection.', icon: Car },
-    { title: 'Battery & Electricals', desc: 'Load testing, alternator health, wiring checks, fuse replacement, and starter motor service.', icon: Clock }
+    {
+      title: 'Periodic Maintenance',
+      desc: 'Manufacturer scheduled general servicing, synthetic oil, filter replacements, and 40-point safety checks.',
+      icon: Wrench,
+      image: 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80',
+      tag: 'Every 10,000 km'
+    },
+    {
+      title: 'Brake System Overhaul',
+      desc: 'Disc resurfacing, ceramic pad replacement, caliper lubrication, and ABS hydraulic diagnostics.',
+      icon: ShieldCheck,
+      image: 'https://images.unsplash.com/photo-1600790142055-619df03207e6?auto=format&fit=crop&w=800&q=80',
+      tag: 'Safety Critical'
+    },
+    {
+      title: 'Climate Control (AC)',
+      desc: 'Refrigerant leak detection, compressor maintenance, condenser flush, and cabin air purification.',
+      icon: Sparkles,
+      image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80',
+      tag: 'Seasonal Care'
+    },
+    {
+      title: 'Engine & Transmission',
+      desc: 'OBD-II computer diagnostics, spark plugs, timing belt check, clutch overhaul, and dyno tuning.',
+      icon: PenTool,
+      image: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=800&q=80',
+      tag: 'High Precision'
+    },
+    {
+      title: 'Suspension & Steering',
+      desc: 'Shock absorber testing, 3D laser wheel alignment, camber balancing, and steering rack inspection.',
+      icon: Car,
+      image: 'https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80',
+      tag: 'Smooth Ride'
+    },
+    {
+      title: 'Battery & Electricals',
+      desc: 'Cold Cranking Amps load testing, alternator health, wiring checks, fuse replacement, and starter service.',
+      icon: Clock,
+      image: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=800&q=80',
+      tag: 'Quick Turnaround'
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: 'Rajesh Varma',
+      vehicle: 'Hyundai Creta 1.5 SX',
+      rating: 5,
+      comment: 'The digital estimate approval before touching the car is a total game changer. I knew the exact cost down to every bolt before agreeing.',
+      date: 'Serviced 2 weeks ago'
+    },
+    {
+      name: 'Ananya Sharma',
+      vehicle: 'Honda City i-VTEC',
+      rating: 5,
+      comment: 'Real-time job tracking gave me complete peace of mind while at work. Inspection report with photos and condition ratings was remarkably professional.',
+      date: 'Serviced 1 month ago'
+    },
+    {
+      name: 'Vikramaditya Rao',
+      vehicle: 'Tata Harrier XZA+',
+      rating: 5,
+      comment: 'OEM genuine parts, transparent labor rates, and the car was handed over right on schedule. Best automobile service facility in the city.',
+      date: 'Serviced 3 days ago'
+    }
   ];
 
   return (
@@ -43,20 +105,20 @@ const Home = () => {
         <div className="container hero-container">
           <div className="hero-text">
             <div className="hero-badge">
-              <Sparkles size={14} className="text-primary" />
-              <span>Transparent Automobile Service Management</span>
+              <Sparkles size={15} className="text-highlight" />
+              <span>Certified Multi-Brand Automobile Workshop</span>
             </div>
             <h1 className="hero-title">
-              Professional Vehicle Servicing With <span className="highlight-text">Zero Guesswork</span>
+              Precision Vehicle Care With <span className="highlight-text">Zero Guesswork</span>
             </h1>
             <p className="hero-subtitle">
-              Professional vehicle servicing with transparent estimates, live job status tracking, OEM parts, and reliable delivery. Every step requires your approval before work begins.
+              Experience transparent vehicle servicing with upfront computerized estimates, live workshop status tracking, certified technicians, and genuine OEM parts. Every service requires your explicit approval.
             </p>
             <div className="hero-actions">
               <Link to="/register" className="btn btn-primary btn-lg">
                 Book Service Appointment <ArrowRight size={18} />
               </Link>
-              <Link to="/login" className="btn btn-outline btn-lg">
+              <Link to="/login" className="btn btn-secondary btn-lg">
                 Track Existing Vehicle
               </Link>
             </div>
@@ -75,20 +137,36 @@ const Home = () => {
               </div>
             </div>
           </div>
+
           <div className="hero-visual">
-            <div className="hero-card shadow-lg">
-              <div className="hero-card-header">
-                <span className="status-pill status-inservice">IN SERVICE</span>
-                <span className="text-muted text-xs">Job #SJ-1002</span>
+            <div className="hero-image-card">
+              <img
+                src="https://images.unsplash.com/photo-1613214149922-f1809c99b414?auto=format&fit=crop&w=1200&q=80"
+                alt="Modern Automotive Diagnostic Workshop"
+                className="hero-main-img"
+              />
+              <div className="hero-image-overlay-card">
+                <div className="overlay-card-header">
+                  <span className="status-pill status-inservice">IN SERVICE</span>
+                  <span className="text-muted text-xs font-mono">JOB #SJ-1002</span>
+                </div>
+                <h3 className="overlay-vehicle-name">Hyundai Creta 1.5 SX</h3>
+                <p className="overlay-reg-plate">MH 12 AB 1234</p>
+                <div className="hero-progress-bar">
+                  <div className="progress-fill" style={{ width: '65%' }}></div>
+                </div>
+                <div className="overlay-card-meta">
+                  <span className="text-xs text-muted">Stage: Brake & Fluid Replacement</span>
+                  <span className="overlay-price">Est. ₹8,909</span>
+                </div>
               </div>
-              <h3 className="hero-card-vehicle">Hyundai Creta 1.5 SX</h3>
-              <p className="hero-card-reg">Reg: MH 12 AB 1234</p>
-              <div className="hero-progress-bar">
-                <div className="progress-fill" style={{ width: '65%' }}></div>
-              </div>
-              <div className="hero-card-meta">
-                <span>Phase: Brake & Fluid Replacement</span>
-                <span className="font-semibold text-primary">Est. ₹8,909</span>
+
+              <div className="hero-tech-badge">
+                <ShieldCheck size={20} className="text-success" />
+                <div>
+                  <strong className="block text-xs text-dark">OEM Certified</strong>
+                  <span className="text-[11px] text-muted">40-Point Digital Safety QA</span>
+                </div>
               </div>
             </div>
           </div>
@@ -118,28 +196,41 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section with Realistic Automotive Images */}
       <section className="services-overview-section">
         <div className="container">
           <div className="section-header text-center">
-            <span className="section-tag">Comprehensive Workshop</span>
+            <span className="section-tag">Factory-Grade Care</span>
             <h2 className="section-title">Automotive Services & Diagnostics</h2>
-            <p className="section-sub">High precision tooling and qualified mechanics for all car brands.</p>
+            <p className="section-sub">
+              High precision diagnostics, manufacturer-grade tooling, and certified master mechanics for all makes and models.
+            </p>
           </div>
 
           <div className="services-grid">
             {serviceCategories.map((cat, i) => {
               const Icon = cat.icon;
               return (
-                <div key={i} className="service-card">
-                  <div className="service-icon-wrap">
-                    <Icon size={24} />
+                <div key={i} className="service-card group">
+                  <div className="service-card-media">
+                    <img
+                      src={cat.image}
+                      alt={cat.title}
+                      className="service-card-img"
+                      loading="lazy"
+                    />
+                    <span className="service-card-badge">{cat.tag}</span>
                   </div>
-                  <h3 className="service-name">{cat.title}</h3>
-                  <p className="service-desc">{cat.desc}</p>
-                  <Link to="/services" className="service-link">
-                    Explore Details <ArrowRight size={14} />
-                  </Link>
+                  <div className="service-card-content">
+                    <div className="service-icon-wrap">
+                      <Icon size={20} />
+                    </div>
+                    <h3 className="service-name">{cat.title}</h3>
+                    <p className="service-desc">{cat.desc}</p>
+                    <Link to="/services" className="service-link">
+                      Explore Details & Pricing <ArrowRight size={15} />
+                    </Link>
+                  </div>
                 </div>
               );
             })}
@@ -147,39 +238,47 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Choose Us & Credential Access */}
       <section className="why-us-section">
         <div className="container why-grid">
           <div>
-            <span className="section-tag">The Apex Advantage</span>
-            <h2 className="section-title">Why Motorists Rely On Apex Motors</h2>
+            <span className="section-tag">The Apex Standard</span>
+            <h2 className="section-title">Why Discerning Motorists Choose Apex Motors</h2>
             <p className="section-sub mb-4">
-              We eliminated the mystery of automotive maintenance. No unexpected charges, no unapproved replacements.
+              We eliminated the mystery and frustration of traditional garages. Zero surprise bills, zero unauthorized part replacements.
             </p>
             <ul className="why-list">
               <li>
-                <CheckCircle2 size={20} className="text-success" />
+                <div className="why-list-icon">
+                  <CheckCircle2 size={18} className="text-primary" />
+                </div>
                 <div>
                   <strong>Mandatory Customer Estimate Approval</strong>
                   <p className="text-muted text-sm">We never turn a wrench without your upfront digital sign-off on parts and labour.</p>
                 </div>
               </li>
               <li>
-                <CheckCircle2 size={20} className="text-success" />
+                <div className="why-list-icon">
+                  <CheckCircle2 size={18} className="text-primary" />
+                </div>
                 <div>
                   <strong>Certified Multi-Point Inspection</strong>
                   <p className="text-muted text-sm">Clear classification of vehicle safety into Good, Needs Attention, and Critical.</p>
                 </div>
               </li>
               <li>
-                <CheckCircle2 size={20} className="text-success" />
+                <div className="why-list-icon">
+                  <CheckCircle2 size={18} className="text-primary" />
+                </div>
                 <div>
                   <strong>Genuine OEM Spare Parts & Inventory Control</strong>
-                  <p className="text-muted text-sm">Live parts stock tracking prevents sub-standard component usage.</p>
+                  <p className="text-muted text-sm">Live parts stock tracking prevents sub-standard counterfeit component usage.</p>
                 </div>
               </li>
               <li>
-                <CheckCircle2 size={20} className="text-success" />
+                <div className="why-list-icon">
+                  <CheckCircle2 size={18} className="text-primary" />
+                </div>
                 <div>
                   <strong>Complete Digital Service History</strong>
                   <p className="text-muted text-sm">Preserve your car resale value with recorded mileage, parts, and invoices.</p>
@@ -190,21 +289,85 @@ const Home = () => {
 
           <div className="why-card-wrap">
             <div className="quick-access-box">
-              <h3>Demonstration Credentials</h3>
-              <p className="text-sm text-muted mb-3">Pre-configured demo accounts for assessment testing:</p>
+              <div className="quick-access-header">
+                <Award size={22} className="text-highlight" />
+                <div>
+                  <h3>Demonstration Credentials</h3>
+                  <p className="text-xs text-muted">Test all role portals with pre-configured accounts:</p>
+                </div>
+              </div>
               <div className="demo-creds-list">
                 <div className="cred-badge">
-                  <strong>Customer:</strong> customer@apexmotors.com / password123
+                  <span className="cred-role">CUSTOMER PORTAL</span>
+                  <code>customer@apexmotors.com / password123</code>
                 </div>
                 <div className="cred-badge">
-                  <strong>Staff:</strong> staff@apexmotors.com / password123
+                  <span className="cred-role">STAFF PORTAL</span>
+                  <code>staff@apexmotors.com / password123</code>
                 </div>
                 <div className="cred-badge">
-                  <strong>Admin:</strong> admin@apexmotors.com / password123
+                  <span className="cred-role">ADMIN PORTAL</span>
+                  <code>admin@apexmotors.com / password123</code>
                 </div>
               </div>
               <Link to="/login" className="btn btn-primary btn-block mt-4">
                 Launch Portal Login <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Testimonials Section */}
+      <section className="testimonials-section">
+        <div className="container">
+          <div className="section-header text-center">
+            <span className="section-tag">Verified Feedback</span>
+            <h2 className="section-title">What Vehicle Owners Say</h2>
+            <p className="section-sub">
+              Over 12,500 car owners trust our digital workshop transparency and technical precision.
+            </p>
+          </div>
+
+          <div className="testimonials-grid">
+            {testimonials.map((t, idx) => (
+              <div key={idx} className="testimonial-card">
+                <div className="testimonial-stars">
+                  {[...Array(t.rating)].map((_, i) => (
+                    <Star key={i} size={16} className="star-filled" />
+                  ))}
+                </div>
+                <p className="testimonial-comment">"{t.comment}"</p>
+                <div className="testimonial-author">
+                  <div className="author-avatar">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="author-name">{t.name}</h4>
+                    <span className="author-vehicle">{t.vehicle}</span>
+                    <span className="author-date">{t.date}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Banner */}
+      <section className="cta-banner-section">
+        <div className="container">
+          <div className="cta-banner">
+            <div className="cta-text">
+              <h2>Ready For A Better Car Servicing Experience?</h2>
+              <p>Book your multi-point vehicle inspection today and receive a transparent digital estimate with zero obligation.</p>
+            </div>
+            <div className="cta-actions">
+              <Link to="/register" className="btn btn-primary btn-lg">
+                Book Service Appointment <ArrowRight size={18} />
+              </Link>
+              <Link to="/contact" className="btn btn-secondary btn-lg">
+                Contact Workshop
               </Link>
             </div>
           </div>

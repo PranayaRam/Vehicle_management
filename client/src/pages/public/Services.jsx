@@ -8,7 +8,10 @@ import {
   Car,
   Clock,
   CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  Shield,
+  Zap,
+  Check
 } from 'lucide-react';
 
 const Services = () => {
@@ -17,6 +20,8 @@ const Services = () => {
       name: 'General Periodic Service',
       time: '3 - 4 Hours',
       price: 'Starting from ₹2,999',
+      image: 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80',
+      badge: 'Popular',
       features: [
         'Comprehensive 40-point safety inspection',
         'Engine oil & oil filter replacement',
@@ -30,6 +35,8 @@ const Services = () => {
       name: 'Brake System Service & Overhaul',
       time: '2 Hours',
       price: 'Starting from ₹1,499',
+      image: 'https://images.unsplash.com/photo-1600790142055-619df03207e6?auto=format&fit=crop&w=800&q=80',
+      badge: 'Safety Critical',
       features: [
         'Front & rear brake pad thickness measurement',
         'Brake disc / rotor inspection & lathe skimming',
@@ -42,6 +49,8 @@ const Services = () => {
       name: 'Climate Control (AC) Servicing',
       time: '2 - 3 Hours',
       price: 'Starting from ₹1,899',
+      image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80',
+      badge: 'Climate Comfort',
       features: [
         'R134a / R1234yf refrigerant pressure test',
         'Compressor oil replenishment',
@@ -54,6 +63,8 @@ const Services = () => {
       name: 'Engine Diagnostics & Tuning',
       time: '2 - 4 Hours',
       price: 'Starting from ₹1,999',
+      image: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=800&q=80',
+      badge: 'OEM Diagnostic',
       features: [
         'OBD-II ECU computer scanner diagnostic report',
         'Throttle body cleaning & sensor calibration',
@@ -66,6 +77,8 @@ const Services = () => {
       name: 'Tyre, Wheel & Suspension',
       time: '1.5 Hours',
       price: 'Starting from ₹999',
+      image: 'https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80',
+      badge: '3D Laser Alignment',
       features: [
         '3D computer computerized wheel alignment',
         'Automated dynamic wheel balancing & weights',
@@ -78,6 +91,8 @@ const Services = () => {
       name: 'Battery & Electrical Diagnosis',
       time: '1 Hour',
       price: 'Starting from ₹499',
+      image: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=800&q=80',
+      badge: 'Fast Turnaround',
       features: [
         'Battery Cold Cranking Amps (CCA) load test',
         'Alternator charging voltage verification',
@@ -89,11 +104,11 @@ const Services = () => {
   ];
 
   return (
-    <div className="services-page py-10">
+    <div className="services-page py-12">
       <div className="container">
-        <div className="section-header text-center mb-8">
+        <div className="section-header text-center mb-10">
           <span className="section-tag">Factory-Grade Precision</span>
-          <h1 className="section-title">Our Service Catalog</h1>
+          <h1 className="section-title">Automotive Service Catalog</h1>
           <p className="section-sub">
             All services include comprehensive multi-point inspection, transparent estimate generation, and digital sign-off.
           </p>
@@ -102,25 +117,36 @@ const Services = () => {
         <div className="catalog-grid">
           {serviceCatalog.map((svc, idx) => (
             <div key={idx} className="catalog-card">
-              <div className="catalog-header">
-                <h3 className="catalog-title">{svc.name}</h3>
-                <div className="catalog-meta">
-                  <span className="catalog-time"><Clock size={14} /> {svc.time}</span>
-                  <span className="catalog-price">{svc.price}</span>
-                </div>
+              <div className="catalog-media-header">
+                <img
+                  src={svc.image}
+                  alt={svc.name}
+                  className="catalog-img"
+                  loading="lazy"
+                />
+                <span className="catalog-badge">{svc.badge}</span>
               </div>
-              <ul className="catalog-features">
-                {svc.features.map((feat, fIdx) => (
-                  <li key={fIdx}>
-                    <CheckCircle2 size={16} className="text-primary feature-icon" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="catalog-footer">
-                <Link to="/register" className="btn btn-outline btn-block">
-                  Book This Service <ArrowRight size={16} />
-                </Link>
+              <div className="catalog-body">
+                <div className="catalog-header">
+                  <h3 className="catalog-title">{svc.name}</h3>
+                  <div className="catalog-meta">
+                    <span className="catalog-time"><Clock size={14} /> {svc.time}</span>
+                    <span className="catalog-price">{svc.price}</span>
+                  </div>
+                </div>
+                <ul className="catalog-features">
+                  {svc.features.map((feat, fIdx) => (
+                    <li key={fIdx}>
+                      <CheckCircle2 size={16} className="text-primary feature-icon" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="catalog-footer">
+                  <Link to="/register" className="btn btn-primary btn-block">
+                    Book This Service <ArrowRight size={16} />
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

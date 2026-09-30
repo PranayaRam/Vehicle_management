@@ -96,7 +96,7 @@ const StaffPayments = () => {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon-wrap bg-amber-500/10 text-[#ffb703]">
+          <div className="stat-icon-wrap bg-amber-500/10 text-highlight">
             <ShieldCheck size={22} />
           </div>
           <div className="stat-details">

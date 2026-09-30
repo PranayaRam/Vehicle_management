@@ -150,28 +150,28 @@ const AdminSettings = () => {
             <Server size={18} className="text-emerald-400" /> Infrastructure & Environment Health
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-            <div className="p-3 rounded-xl bg-[#0b0e15] border border-border">
+            <div className="p-3 rounded-xl bg-slate-50 border border-border">
               <span className="text-muted block mb-1">Database Cluster:</span>
-              <strong className="text-emerald-400 flex items-center gap-1">
-                <Database size={13} /> MongoDB v8.0 Connected
+              <strong className="text-emerald-500 flex items-center gap-1">
+                <Database size={13} /> MongoDB Atlas / Cluster
               </strong>
-              <span className="text-muted font-mono text-[10px]">127.0.0.1:27017</span>
+              <span className="text-muted font-mono text-[10px]">Cloud Connection Live</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#0b0e15] border border-border">
+            <div className="p-3 rounded-xl bg-slate-50 border border-border">
               <span className="text-muted block mb-1">API Service:</span>
-              <strong className="text-emerald-400 flex items-center gap-1">
-                <Server size={13} /> Node.js Express 5000
+              <strong className="text-emerald-500 flex items-center gap-1">
+                <Server size={13} /> Node.js Express Cloud
               </strong>
               <span className="text-muted font-mono text-[10px]">JWT / RESTful API</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#0b0e15] border border-border">
+            <div className="p-3 rounded-xl bg-slate-50 border border-border">
               <span className="text-muted block mb-1">Client Framework:</span>
-              <strong className="text-emerald-400 flex items-center gap-1">
+              <strong className="text-emerald-500 flex items-center gap-1">
                 <ShieldCheck size={13} /> React 18 + Vite HMR
               </strong>
-              <span className="text-muted font-mono text-[10px]">Port 5173 Live</span>
+              <span className="text-muted font-mono text-[10px]">Active</span>
             </div>
           </div>
         </div>

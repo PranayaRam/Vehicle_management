@@ -77,7 +77,7 @@ const AdminReports = () => {
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon-wrap bg-amber-500/10 text-[#ffb703]">
+              <div className="stat-icon-wrap bg-amber-500/10 text-highlight">
                 <Clock size={22} />
               </div>
               <div className="stat-details">
@@ -176,7 +176,7 @@ const AdminReports = () => {
                           <td className="text-muted">Min: {p.minimumStock}</td>
                           <td className="font-mono">₹{p.unitPrice?.toLocaleString()}</td>
                           <td>
-                            <span className="badge badge-warning text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-[#ffb703] border border-amber-500/20">
+                            <span className="badge badge-warning text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-highlight border border-amber-500/20">
                               REORDER REQUIRED
                             </span>
                           </td>

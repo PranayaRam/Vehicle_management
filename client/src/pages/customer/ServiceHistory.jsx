@@ -89,8 +89,8 @@ const ServiceHistory = () => {
         </div>
       ) : vehicles.length === 0 ? (
         <div className="content-card p-8 text-center">
-          <Car size={36} className="text-[#ffb703] mx-auto mb-2 opacity-80" />
-          <h3 className="text-lg font-bold text-white mb-2">No Vehicles Registered</h3>
+          <Car size={36} className="text-highlight mx-auto mb-2 opacity-90" />
+          <h3 className="text-lg font-bold text-dark mb-2">No Vehicles Registered</h3>
           <p className="text-gray-400 text-sm max-w-md mx-auto mb-4">
             Add a vehicle to your profile to build and view its permanent digital maintenance ledger.
           </p>
@@ -169,25 +169,25 @@ const ServiceHistory = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-xs">
-                      <div className="bg-[#0b0e15] p-3 rounded-lg border border-border">
+                      <div className="bg-slate-50 p-3 rounded-lg border border-border">
                         <span className="text-muted block mb-1">Customer Concern:</span>
-                        <p className="text-gray-200 italic">"{job?.reportedProblem || 'Standard Periodic Service'}"</p>
+                        <p className="text-slate-700 italic">"{job?.reportedProblem || 'Standard Periodic Service'}"</p>
                       </div>
 
-                      <div className="bg-[#0b0e15] p-3 rounded-lg border border-border">
+                      <div className="bg-slate-50 p-3 rounded-lg border border-border">
                         <span className="text-muted block mb-1">Service Execution:</span>
-                        <p className="text-gray-200">
-                          Handled by: <strong className="text-white">{job?.assignedStaffId?.name || 'Service Advisor'}</strong>
+                        <p className="text-slate-700">
+                          Handled by: <strong className="text-dark">{job?.assignedStaffId?.name || 'Service Advisor'}</strong>
                         </p>
-                        <p className="text-emerald-400 font-semibold mt-1">Road test & Quality Check passed</p>
+                        <p className="text-emerald-500 font-semibold mt-1">Road test & Quality Check passed</p>
                       </div>
 
-                      <div className="bg-[#0b0e15] p-3 rounded-lg border border-border">
+                      <div className="bg-slate-50 p-3 rounded-lg border border-border">
                         <span className="text-muted block mb-1">Settlement Summary:</span>
-                        <div className="font-mono font-bold text-white text-sm">
+                        <div className="font-mono font-bold text-dark text-sm">
                           Total: ₹{invoice?.total?.toLocaleString() || 'N/A'}
                         </div>
-                        <span className="text-emerald-400 font-semibold text-[11px]">Paid in full via {invoice?.invoiceNumber}</span>
+                        <span className="text-emerald-500 font-semibold text-[11px]">Paid in full via {invoice?.invoiceNumber}</span>
                       </div>
                     </div>
 

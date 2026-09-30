@@ -8,13 +8,13 @@ const NotFound = () => {
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center p-6 text-center">
-      <div className="max-w-md w-full p-8 rounded-2xl bg-[#111622] border border-[#232936] shadow-xl">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-[#ffb703]">
+      <div className="max-w-md w-full p-8 rounded-2xl bg-white border border-border shadow-xl">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-highlight">
           <Wrench size={32} />
         </div>
-        <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">404</h1>
-        <h2 className="text-xl font-bold text-gray-200 mb-3">Page Not Found</h2>
-        <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+        <h1 className="text-4xl font-extrabold text-dark mb-2 tracking-tight">404</h1>
+        <h2 className="text-xl font-bold text-slate-800 mb-3">Page Not Found</h2>
+        <p className="text-muted text-sm mb-6 leading-relaxed">
           The garage bay or workshop resource you are looking for does not exist or may have been moved.
         </p>
 

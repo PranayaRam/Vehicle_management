@@ -155,7 +155,7 @@ const StaffInvoices = () => {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon-wrap bg-amber-500/10 text-[#ffb703]">
+          <div className="stat-icon-wrap bg-amber-500/10 text-highlight">
             <Clock size={22} />
           </div>
           <div className="stat-details">
@@ -304,14 +304,14 @@ const StaffInvoices = () => {
       >
         {paymentInvoice && (
           <form onSubmit={handleRecordPayment} className="space-y-4">
-            <div className="bg-[#0b0e15] border border-border rounded-xl p-3 text-xs space-y-1">
+            <div className="bg-slate-50 border border-border rounded-xl p-3 text-xs space-y-1">
               <div className="flex-between">
                 <span className="text-muted">Invoice Total:</span>
-                <span className="font-mono font-semibold text-white">₹{paymentInvoice.total?.toLocaleString()}</span>
+                <span className="font-mono font-semibold text-dark">₹{paymentInvoice.total?.toLocaleString()}</span>
               </div>
               <div className="flex-between">
                 <span className="text-muted">Already Paid:</span>
-                <span className="font-mono text-gray-300">₹{(paymentInvoice.amountPaid || 0).toLocaleString()}</span>
+                <span className="font-mono text-slate-700">₹{(paymentInvoice.amountPaid || 0).toLocaleString()}</span>
               </div>
               <div className="flex-between border-t border-border pt-1 font-bold">
                 <span className="text-white">Balance Due:</span>

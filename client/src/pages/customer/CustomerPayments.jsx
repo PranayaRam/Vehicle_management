@@ -119,7 +119,7 @@ const CustomerPayments = () => {
       {/* Summary Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div className="stat-card">
-          <div className="stat-icon-wrap bg-amber-500/10 text-[#ffb703]">
+          <div className="stat-icon-wrap bg-amber-500/10 text-highlight">
             <Clock size={22} />
           </div>
           <div className="stat-details">
@@ -245,10 +245,10 @@ const CustomerPayments = () => {
       >
         {selectedInvoice && (
           <div className="space-y-4">
-            <div className="bg-[#0b0e15] border border-border rounded-xl p-4">
+            <div className="bg-slate-50 border border-border rounded-xl p-4">
               <div className="flex-between mb-2">
                 <span className="text-xs text-muted">Vehicle:</span>
-                <span className="text-sm font-semibold text-white">
+                <span className="text-sm font-semibold text-dark">
                   {selectedInvoice.vehicleId?.brand} {selectedInvoice.vehicleId?.model} ({selectedInvoice.vehicleId?.registrationNumber})
                 </span>
               </div>
@@ -288,7 +288,7 @@ const CustomerPayments = () => {
               </div>
             </div>
 
-            <div className="text-xs text-muted bg-[#111622] p-3 rounded-lg border border-border flex items-center gap-2">
+            <div className="text-xs text-muted bg-slate-50 p-3 rounded-lg border border-border flex items-center gap-2">
               <ShieldCheck size={16} className="text-emerald-400 flex-shrink-0" />
               <span>Payments are processed with 256-bit encryption. A digital receipt will be generated automatically.</span>
             </div>

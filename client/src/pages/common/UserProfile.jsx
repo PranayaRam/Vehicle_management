@@ -152,12 +152,12 @@ const UserProfile = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Identity Summary Card */}
           <div className="content-card text-center p-6 flex flex-col items-center">
-            <div className="avatar-circle w-20 h-20 text-2xl font-bold mb-4 bg-primary text-black mx-auto flex items-center justify-center rounded-full">
+            <div className="avatar-circle w-20 h-20 text-2xl font-bold mb-4 bg-primary text-white mx-auto flex items-center justify-center rounded-full shadow-md">
               {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
             </div>
-            <h3 className="text-lg font-bold text-white mb-1">{user?.name}</h3>
+            <h3 className="text-lg font-bold text-dark mb-1">{user?.name}</h3>
             <p className="text-xs text-muted mb-4 font-mono">{user?.email}</p>
-            <span className="badge badge-primary uppercase tracking-wide text-xs px-3 py-1 font-semibold rounded-full bg-amber-500/10 text-[#ffb703] border border-amber-500/20">
+            <span className="badge badge-primary uppercase tracking-wide text-xs px-3 py-1 font-semibold rounded-full bg-amber-500/10 text-highlight border border-amber-500/20">
               <ShieldCheck size={12} className="inline mr-1" />
               {user?.role} ACCOUNT
             </span>
